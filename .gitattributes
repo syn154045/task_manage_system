@@ -1,11 +1,28 @@
-* text=auto
+# 改行コード統一
+* text=auto eol=lf
 
+# 差分表示
 *.blade.php diff=html
 *.css diff=css
+*.js diff=javascript
+*.json diff=json
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
 
+# エクスポートから除外するファイル
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+/tests export-ignore
+
+# バイナリファイル
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+*.dll binary

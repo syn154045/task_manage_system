@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import vue from "@vitejs/plugin-vue";
+// import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
     plugins: [
-        topLevelAwait(),
+        // topLevelAwait(),
         laravel({
             input: [
                 'resources/css/app.css',
@@ -14,13 +14,17 @@ export default defineConfig({
         }),
     ],
     optimizeDeps: {
-        include: ['toastify-js']
+        // 明示的に事前バンドルに含めたい依存関係
+        // include: ['axios']
+        // 事前バンドルから除外する依存関係（各ライブラリのdocs参照）
+        // exclude: []
     },
     css: {
         preprocessorOptions: {
-            scss: {
-                additionalData: `@import 'toastify-js/src/toastify.scss';`,
-            },
+            // プリプロセッサファイル
+            // scss: {
+            //     additionalData: `@import 'variables.scss';`,
+            // },
         },
     },
     server: {

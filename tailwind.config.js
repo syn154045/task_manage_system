@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -9,26 +11,29 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                prefix: {
+                // prefixname: {
                     // **ハイフンは使えません**
                     // colorname: '#000000',
-                }
+                // },
             },
             screens: {
                 'pc': '1280px',
                 'tablet': '600px',  // ipad mini 基準->768px
-                'phone': '360px'    // iphone 基準->375px
-            }
+                'phone': '360px',   // iphone 基準->375px
+            },
         },
     },
     plugins: [
         plugin(function ({ addUtilities}) {
             addUtilities ({
-                // アスペクト比4:3
+                // アスペクト比 (1/1=square、16/9=videoは既存)16:9=1.9
                 '.aspect-standard': {
                     'aspect-ratio': '4 / 3'
                 },
-                // sanmple
+                '.aspect_cinema': {
+                    'aspect-ratio': '12 / 5'
+                },
+                // sanmple(button)
                 '.btn-green': {
                     'color': '#1CB539',
                     'font-weight': 700,

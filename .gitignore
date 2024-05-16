@@ -16,3 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# for WSL / MacOS
+*Zone.Identifier
+.DS_Store
