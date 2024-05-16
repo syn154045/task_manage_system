@@ -1,8 +1,8 @@
-<div class="p-5">
+<h1 class="p-5">
     <a href="" class="text-slate-800 text-2xl font-semibold hover:text-gray-500 transition duration-500">
         管理ページ
     </a>
-</div>
+</h1>
 <nav class="pt-2 pl-5 pr-1 text-sm text-slate-600">
     <a href="" class="flex items-center hover:text-lime-600 pt-7 transition duration-500">
         <i class="fas fa-users w-1/6"></i>
