@@ -10,6 +10,10 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                'zen-maru': ['Zen Maru Gothic'],
+                'mplus-rounded': ['M PLUS Rounded 1c'],
+            },
             colors: {
                 // prefixname: {
                     // **ハイフンは使えません**
@@ -21,17 +25,22 @@ module.exports = {
                 'tablet': '600px',  // ipad mini 基準->768px
                 'phone': '360px',   // iphone 基準->375px
             },
+            aspectRatio: {
+                'standard': '4 / 3',
+                'cinema': '12 / 5',
+            },
         },
     },
     plugins: [
         plugin(function ({ addUtilities}) {
             addUtilities ({
-                // アスペクト比 (1/1=square、16/9=videoは既存)16:9=1.9
-                '.aspect-standard': {
-                    'aspect-ratio': '4 / 3'
-                },
-                '.aspect_cinema': {
-                    'aspect-ratio': '12 / 5'
+                // scroll-bar
+                '.hidden-scrollbar': {
+                    '-ms-overflow-style': 'none',   // IE, Edge
+                    'scrollbar-width': 'none',      // firefox
+                    '&::-webkit-scrollbar': {
+                        'display': 'none',          // Chrome, Safari
+                    },
                 },
                 // sanmple(button)
                 '.btn-green': {
