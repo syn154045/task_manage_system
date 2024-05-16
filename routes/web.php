@@ -20,6 +20,8 @@ use App\Http\Controllers\DevelopTestController;
 Route::get('/', function () {
     return view('main');
 });
+// admin(ページレイアウト確認用)
+route::view('/admin/dashboard', 'admin/dashboard');
 
 // テンプレートとして以下用意したので、必要に応じてコメントアウトを外して下さい。また、不要な場合は削除してください。
 // global-pages / user-login / user-registration / admin-login / admin-pages
@@ -28,7 +30,7 @@ Route::get('/', function () {
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
 Route::prefix('/shop')->group(function () {
-    Route::get('/', function () { return 'This is shop page'; })->name('shop');
+    Route::get('/', function () { return 'This is shop shop page'; })->name('shop');
     // Route::get('/lists', [ShopController::class, 'listView'])->name('shop.list');
     // Route::get('/detail', [ShopController::class, 'detail'])->name('shop.detail');
 });
