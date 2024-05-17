@@ -12,49 +12,96 @@
         </label>
     </button>
 </header>
-{{-- ハンバーガーメニュー --}}
+{{-- ハンバーガーメニュー（文字数上限：14文字） --}}
 <nav class="relative z-[99]">
-    <ul id="menuContainer" class="absolute right-0 w-0 py-5 bg-gray-100 text-xs text-slate-600 transition-all duration-500 overflow-x-hidden whitespace-nowrap">
-        <li class="w-full flex">
+    <ul id="menuContainer" class="absolute right-0 w-0 pt-2 pb-5 bg-gray-100 text-xs text-slate-600 transition-all duration-500 overflow-x-hidden whitespace-nowrap">
+        <li class="w-full h-12 flex">
             <div class="w-1/2 flex justify-center">
-                <div class="w-5/6 border-b border-slate-400 p-2 hover:text-lime-700 transition duration-500">
-                    <a href="">
-                        トップページ
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center">
+                        <i class="fas fa-user w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">アカウント管理</p>
                     </a>
                 </div>
             </div>
             <div class="w-1/2 flex justify-center">
-                <div class="w-5/6 border-b border-slate-400 p-2 hover:text-lime-700 transition duration-500">
-                    <a href="">
-                        アカウント編集
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center">
+                        <i class="fas fa-users w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">〇〇一覧</p>
                     </a>
                 </div>
             </div>
         </li>
-        <li class="w-full flex">
+        <li class="w-full h-12 flex">
             <div class="w-1/2 flex justify-center">
-                <div class="w-5/6 border-b border-slate-400 p-2 hover:text-lime-700 transition duration-500">
-                    <a href="">
-                        〇〇一覧
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center">
+                        <i class="fas fa-location-dot w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">△△一覧</p>
                     </a>
                 </div>
             </div>
             <div class="w-1/2 flex justify-center">
-                <div class="w-5/6 border-b border-slate-400 p-2 hover:text-lime-700 transition duration-500">
-                    <a href="">
-                        △△一覧
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center">
+                        <i class="far fa-calendar-check w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">××一覧</p>
                     </a>
                 </div>
             </div>
+        </li>
+        <li class="w-full h-12 flex">
+            <div class="w-1/2 flex justify-center">
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center relative">
+                        <i class="fas fa-paper-plane w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">お問合せ一覧</p>
+                        {{-- @if(!empty($variableCount)) --}}
+                        <div class="absolute -top-1 -right-5 w-4 h-4 flex justify-center items-center">
+                            <i class="fas fa-2xl fa-comment text-rose-500"></i>
+                            <p class="text-xs text-white absolute -top-[0.075rem]">
+                                {{-- {{ $variableCount }} --}}20
+                            </p>
+                        </div>
+                        {{-- @endif --}}
+                    </a>
+                </div>
+            </div>
+            {{-- 奇数個の場合は、以下のようにコメントアウト --}}
+            {{-- <div class="w-1/2 flex justify-center">
+                <div class="w-5/6 flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
+                    <a href="" class="jsMenuItems w-full hidden items-center">
+                        <i class="fas fa-users w-1/6"></i>
+                        <p class="w-5/6 pl-1 text-wrap">××一覧</p>
+                    </a>
+                </div>
+            </div> --}}
         </li>
     </ul>
 </nav>
 
 <script>
+    const checkbox = document.getElementById('checkbox');
     const menuContainer = document.getElementById('menuContainer');
+    const menuItems = document.querySelectorAll('.jsMenuItems');
 
     function menuToggle() {
         menuContainer.classList.toggle('w-0');
         menuContainer.classList.toggle('w-full');
+
+        menuItems.forEach(menuItem => {
+            if (checkbox.checked) {
+                setTimeout(() => {
+                    menuItem.classList.toggle('animate-fade-in');
+                    menuItem.classList.toggle('hidden');
+                    menuItem.classList.toggle('flex');
+                }, 550);
+            } else {
+                menuItem.classList.toggle('animate-fade-in');
+                menuItem.classList.toggle('hidden');
+                menuItem.classList.toggle('flex');
+            }
+        });
     }
 </script>

@@ -10,6 +10,28 @@ module.exports = {
     ],
     theme: {
         extend: {
+            animation: {
+                'fade-in': 'fade-in 500ms forwards',
+                'fade-out': 'fade-out 500ms forwards',
+            },
+            keyframes: {
+                'fade-in': {
+                    '0%': {
+                        opacity: 0
+                    },
+                    '100%': {
+                        opacity: 1
+                    },
+                },
+                'fade-out': {
+                    '0%': {
+                        opacity: 1
+                    },
+                    '100%': {
+                        opacity:0
+                    }
+                },
+            },
             fontFamily: {
                 'zen-maru': ['Zen Maru Gothic'],
                 'mplus-rounded': ['M PLUS Rounded 1c'],

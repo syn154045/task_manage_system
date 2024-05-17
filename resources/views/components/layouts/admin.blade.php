@@ -9,7 +9,7 @@
 
     {{-- title & favicon --}}
     <title>{{ config('app.name', 'Laravel') . "-" . $title }}</title>
-    <link rel="shortcut icon" href="{{ config('app.url') }}/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ config('app.url') }}/favicon.png">
 
     {{-- fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,23 +25,23 @@
 <body class="font-zen-maru">
     <div class="bg-gray-100 flex">
         @if (isset($sidebar))
-        <aside class="hidden sm:block relative bg-white w-64 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
+        <aside class="hidden md:block fixed bg-white w-52 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
             <x-admin.sidebar />
         </aside>
         @endif
 
-        <container class="w-full h-screen overflow-y-hidden">
+        <container class="md:ml-52 w-full flex flex-col">
             {{-- desktop header --}}
-            <header class="hidden sm:block sticky">
+            <header class="hidden md:block sticky top-0 z-10 bg-white shadow-lg">
                 <x-admin.header />
             </header>
 
             {{-- mobile header --}}
-            <header class="block sm:hidden sticky">
+            <header class="block md:hidden sticky top-0 z-10 bg-white shadow-lg">
                 <x-admin.hamburger />
             </header>
 
-            <main>
+            <main class="flex-grow overflow-y-auto">
                 {{ $slot }}
             </main>
         </container>
