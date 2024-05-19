@@ -14,7 +14,8 @@
                 <i class="fas fa-lg fa-person w-1/6"></i>
                 <p class="w-5/6">アカウント管理</p>
             </a>
-            <form method="POST" action="" class="w-full">
+            <form method="POST" action="{{ route('admin.logout')}}" class="w-full">
+                @csrf
                 <button type="submit" class="flex items-center w-full px-4 py-2 text-left hover:bg-slate-100 hover:text-lime-600 transition duration-500">
                     <i class="fas fa-lg fa-person-running w-1/6"></i>
                     <p class="w-5/6">ログアウト</p>

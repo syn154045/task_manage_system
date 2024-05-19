@@ -22,22 +22,31 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-zen-maru">
+<body class="font-zen-maru bg-slate-100">
+    {{-- login page --}}
+    @if (Request::is('admin/login'))
+    <main class="w-screen h-screen">
+        {{ $slot }}
+    </main>
+
+    {{-- admin page --}}
+    @else
     <div class="bg-gray-100 flex">
         @if (isset($sidebar))
-        <aside class="hidden md:block fixed bg-white w-52 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
+        <aside class="hidden tablet:block fixed bg-white w-52 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
             <x-admin.sidebar />
         </aside>
+        <div class="tablet:ml-52"></div>
         @endif
 
-        <container class="md:ml-52 w-full flex flex-col">
+        <container class="w-full flex flex-col">
             {{-- desktop header --}}
-            <header class="hidden md:block sticky top-0 z-10 bg-white shadow-lg">
+            <header class="hidden tablet:block sticky top-0 z-10 bg-white shadow-lg">
                 <x-admin.header />
             </header>
 
             {{-- mobile header --}}
-            <header class="block md:hidden sticky top-0 z-10 bg-white shadow-lg">
+            <header class="block tablet:hidden sticky top-0 z-10 bg-white shadow-lg">
                 <x-admin.hamburger />
             </header>
 
@@ -46,5 +55,6 @@
             </main>
         </container>
     </div>
+    @endif
 </body>
 </html>

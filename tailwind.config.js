@@ -44,8 +44,8 @@ module.exports = {
             },
             screens: {
                 'pc': '1280px',
-                'tablet': '600px',  // ipad mini 基準->768px
-                'phone': '360px',   // iphone 基準->375px
+                'tablet': '600px',  // ipad mini 基準->768px (if you need big-tablet->1024px)
+                'phone': '360px',   // iphone 基準->375px (min:320px)
             },
             aspectRatio: {
                 'standard': '4 / 3',
