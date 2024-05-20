@@ -77,7 +77,9 @@ Route::prefix('/admin')->group(function () {
 Route::prefix('/admin')->middleware('auth.admin:administrators')->group(function () {
     Route::view('/dashboard', 'admin/dashboard')->name('admin.dashboard.index');
 
-    Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+    Route::view('/sampleList', 'admin/sampleList')->name('admin.sample.list');
 
     Route::prefix('/profile')->group(function () {
         // Route::get('/password-edit', [Admin\ProfileController::class, 'passwordView'])->name('password.view');

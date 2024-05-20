@@ -14,7 +14,7 @@
     </h2>
 
     <contents class="w-full max-w-2xl mx-auto mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-6 tablet:gap-x-16 tablet:gap-y-8 tablet:justify-around tablet:text-lg">
-        <a href="" class="flex justify-center items-center w-11/12 h-16 tablet:h-20 mx-auto p-4 bg-lime-200 rounded-3xl hover:bg-lime-400 transition-all duration-300">
+        <a href="{{ route('admin.sample.list')}}" class="flex justify-center items-center w-11/12 h-16 tablet:h-20 mx-auto p-4 bg-lime-200 rounded-3xl hover:bg-lime-400 transition-all duration-300">
             <i class="fas fa-earth-asia w-1/6"></i>
             <p class="w-5/6 pl-1">〇〇一覧</p>
         </a>
