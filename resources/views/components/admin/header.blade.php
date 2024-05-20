@@ -3,7 +3,7 @@
         <button id="dropdownButton" class="w-32 mr-3">
             <label for="dropdown" class="relative w-full h-10 cursor-pointer flex justify-center items-center duration-500 bg-slate-100 hover:bg-slate-300 rounded-2xl text-sm">
                 <input type="button" id="dropdownCheck" class="hidden peer" onclick="dropdownToggle()">
-                <p class="w-[80%]">管理者　氏名</p>
+                <p class="w-[80%]">{{ Auth::guard('administrators')->user()->name }}</p>
                 <i class="fas fa-sm fa-angle-down absolute -translate-y-1/2 top-1/2 right-1"></i>
             </label>
         </button>

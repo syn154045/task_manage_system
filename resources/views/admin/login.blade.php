@@ -1,13 +1,19 @@
 <x-layouts.admin title=login>
     <div class="bg-slate-100">
-        <div class="w-11/12 max-w-xl mx-auto pt-32 pb-8 flex flex-col items-center justify-center">
-            <h1 class="flex items-center text-4xl font-semibold mb-6 text-slate-800 text-center">
+        <div class="w-11/12 max-w-xl mx-auto pt-24 tablet:pt-40 pb-8 flex flex-col items-center justify-center">
+            <h1 class="flex items-center text-4xl font-semibold mb-8 text-slate-800 text-center">
                 <i class="fas fa-sm fa-fingerprint"></i>
                 <p class="pl-5">Log In</p>
             </h1>
 
-            <form action="{{ route('admin.login') }}" method="POST" class="w-full">
+            <form action="{{ route('admin.login') }}" method="POST" class="relative w-full pt-6">
                 @csrf
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-red-700 opacity-80">
+                    @error('login')
+                        {{ $message }}
+                    @endif
+                </div>
+
                 <div class="relative mt-10">
                     <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="email" class="peer p-2 w-full outline-none bg-transparent placeholder:text-transparent">
                     <div class="h-[0.125rem] bg-slate-600 peer-focus:bg-gradient-to-r from-lime-700 to-lime-300 transition-colors duration-300"></div>
@@ -23,6 +29,7 @@
                 </div>
 
                 <div class="relative mt-10">
+                    <i id="passwordVisible" class="fas fa-eye-slash absolute top-3 right-4 cursor-pointer"></i>
                     <input type="password" id="password" name="password" placeholder="pass" class="peer p-2 w-full outline-none bg-transparent placeholder:text-transparent">
                     <div class="h-[0.125rem] bg-slate-600 peer-focus:bg-gradient-to-r from-lime-700 to-lime-300 transition-colors duration-300"></div>
                     <label for="password" class="block absolute -top-3 cursor-none text-sm text-slate-800 transition-all duration-500 peer-focus:text-lime-600 peer-focus:-top-3 peer-focus:text-sm peer-focus:transition-all peer-focus:duration-500 peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg peer-placeholder-shown:cursor-text">
@@ -54,7 +61,7 @@
                 </div>
 
                 <div class="w-1/2 mx-auto mt-12">
-                    <button type="submit" class="w-full bg-lime-800 text-white p-2 rounded-md hover:bg-lime-600 focus:outline-none focus:bg-lime-600  transition-colors duration-300">
+                    <button type="submit" class="w-full bg-lime-200 text-slate-800 p-2 rounded-md hover:bg-lime-400 focus:outline-none focus:bg-lime-400  transition-colors duration-300">
                         Sign In
                     </button>
                 </div>
@@ -63,28 +70,52 @@
     </div>
 
     <script>
-        // SVG stroke controll
+        // SVG check stroke controll
         const rememberCheck = document.getElementById('remember');
-        const rememberCheckbox = (rememberCheck.nextElementSibling.querySelector('path'));
+        const rememberCheckbox = rememberCheck.nextElementSibling;
+        const rememberCheckboxSvg = (rememberCheck.nextElementSibling.querySelector('path'));
 
         rememberCheck.addEventListener('checked', rememberToggle);
-
-        function rememberToggle() {
+        rememberCheckbox.addEventListener('click', function(event) {
             if (rememberCheck.checked) {
-                rememberCheckbox.style.strokeDasharray = '70.5096664428711 9999999';
-                rememberCheckbox.style.strokeDashoffset = '-262.2723388671875';
+                rememberCheck.checked = false;
             } else {
-                rememberCheckbox.style.strokeDasharray = '241 9999999';
-                rememberCheckbox.style.strokeDashoffset = '0';
+                rememberCheck.checked = true;
             }
-            console.log(rememberCheck.checked);
-        };
-
+            rememberToggle();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const rememberCheck = document.getElementById('remember');
             if (rememberCheck.checked) {
                 rememberToggle();
             }
         });
+
+        function rememberToggle() {
+            if (rememberCheck.checked) {
+                rememberCheckboxSvg.style.strokeDasharray = '70.5096664428711 9999999';
+                rememberCheckboxSvg.style.strokeDashoffset = '-262.2723388671875';
+            } else {
+                rememberCheckboxSvg.style.strokeDasharray = '241 9999999';
+                rememberCheckboxSvg.style.strokeDashoffset = '0';
+            }
+        };
+
+        // password visible
+        const passwordVisible = document.getElementById('passwordVisible');
+        const passwordBox = passwordVisible.nextElementSibling;
+
+        passwordVisible.addEventListener('click', function() {
+            if (passwordVisible.classList.contains('fa-eye-slash')) {
+                passwordVisible.classList.remove('fa-eye-slash');
+                passwordVisible.classList.add('fa-eye');
+                passwordBox.type = 'text';
+            } else {
+                passwordVisible.classList.remove('fa-eye');
+                passwordVisible.classList.add('fa-eye-slash');
+                passwordBox.type = 'password';
+            }
+        });
+
     </script>
 </x-layouts.admin>

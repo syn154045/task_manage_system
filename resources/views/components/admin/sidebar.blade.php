@@ -5,7 +5,7 @@
 </h1>
 <nav class="pt-2 pl-5 pr-1 text-sm text-slate-600">
     <a href="" class="flex items-center hover:text-lime-600 hover:font-semibold pt-7 transition duration-500">
-        <i class="fas fa-users w-1/6"></i>
+        <i class="fas fa-earth-asia w-1/6"></i>
         <p class="w-5/6">〇〇一覧</p>
     </a>
     <a href="" class="flex items-center hover:text-lime-600 hover:font-semibold pt-7 transition duration-500">

@@ -1,10 +1,12 @@
-<header class="flex justify-between border-b border-slate-800 border-opacity-60">
-    <h1 class="flex items-center pl-5 h-16 text-2xl text-slate-800 font-semibold">
-        管理ページ
-    </h1>
-    <h2 class="mx-3 flex items-center">
-        <p class="mr-3 max-w-24 text-sm text-slate-800">
-            管理者　氏名氏名
+<header class="flex justify-between h-16 border-b border-slate-800 border-opacity-60">
+    <a href="{{ route('admin.dashboard.index')}}" class="flex items-center">
+        <h1 class="flex items-center pl-4 text-xl text-slate-800 font-semibold">
+            管理ページ
+        </h1>
+    </a>
+    <h2 class="mx-1 flex items-center">
+        <p class="mr-3 max-w-24 text-xs text-slate-800">
+            {{ Auth::guard('administrators')->user()->name }}
         </p>
         <button class="w-10">
             <label for="checkbox" class="relative w-8 h-10 cursor-pointer flex flex-col justify-center items-center gap-2 duration-500 has-[:checked]:rotate-180 has-[:checked]:duration-500">
@@ -44,7 +46,7 @@
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
                     <a href="" class="jsMenuItems w-full hidden items-center relative">
-                        <i class="fas fa-location-dot w-1/6"></i>
+                        <i class="fas fa-earth-asia w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">〇〇一覧</p>
                     </a>
                 </div>
@@ -52,7 +54,7 @@
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
                     <a href="" class="jsMenuItems w-full hidden items-center relative">
-                        <i class="far fa-calendar-check w-1/6"></i>
+                        <i class="fas fa-location-dot w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">△△一覧</p>
                     </a>
                 </div>
@@ -62,7 +64,7 @@
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
                     <a href="" class="jsMenuItems w-full hidden items-center relative">
-                        <i class="fas fa-paper-plane w-1/6"></i>
+                        <i class="fas fa-calendar-check w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">××一覧</p>
                     </a>
                 </div>
@@ -70,7 +72,7 @@
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-slate-400 hover:text-lime-700 transition duration-500">
                     <a href="" class="jsMenuItems w-full hidden items-center relative">
-                        <i class="fas fa-users w-1/6"></i>
+                        <i class="fas fa-paper-plane w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">お問い合わせ一覧</p>
                         {{-- @if(!empty($variableCount)) --}}
                         <div class="absolute -top-1 -right-4 w-4 h-4 flex justify-center items-center">

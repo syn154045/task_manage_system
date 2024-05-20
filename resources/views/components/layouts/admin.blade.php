@@ -31,8 +31,8 @@
 
     {{-- admin page --}}
     @else
-    <div class="bg-gray-100 flex">
-        @if (isset($sidebar))
+    <div class="bg-gray-100 flex h-screen">
+        @if (!(Request::is('admin/dashboard')))
         <aside class="hidden tablet:block fixed bg-white w-52 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
             <x-admin.sidebar />
         </aside>
