@@ -10,6 +10,28 @@ module.exports = {
     ],
     theme: {
         extend: {
+            animation: {
+                'fade-in': 'fade-in 500ms forwards',
+                'fade-out': 'fade-out 500ms forwards',
+            },
+            keyframes: {
+                'fade-in': {
+                    '0%': {
+                        opacity: 0
+                    },
+                    '100%': {
+                        opacity: 1
+                    },
+                },
+                'fade-out': {
+                    '0%': {
+                        opacity: 1
+                    },
+                    '100%': {
+                        opacity:0
+                    }
+                },
+            },
             fontFamily: {
                 'zen-maru': ['Zen Maru Gothic'],
                 'mplus-rounded': ['M PLUS Rounded 1c'],
@@ -22,8 +44,8 @@ module.exports = {
             },
             screens: {
                 'pc': '1280px',
-                'tablet': '600px',  // ipad mini 基準->768px
-                'phone': '360px',   // iphone 基準->375px
+                'tablet': '600px',  // ipad mini 基準->768px (if you need big-tablet->1024px)
+                'phone': '360px',   // iphone 基準->375px (min:320px)
             },
             aspectRatio: {
                 'standard': '4 / 3',

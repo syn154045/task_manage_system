@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DevelopTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,6 @@ use App\Http\Controllers\DevelopTestController;
 Route::get('/', function () {
     return view('main');
 });
-// admin(ページレイアウト確認用)
-route::view('/admin/dashboard', 'admin/dashboard');
 
 // テンプレートとして以下用意したので、必要に応じてコメントアウトを外して下さい。また、不要な場合は削除してください。
 // global-pages / user-login / user-registration / admin-login / admin-pages
@@ -71,13 +69,17 @@ Route::middleware('verified')->group(function () {
 
 // Admin Login
 Route::prefix('/admin')->group(function () {
-    // Route::get('login', [Admin\LoginController::class, 'loginView'])->name('admin.login.view');
-    // Route::post('login', [Admin\LoginController::class, 'login'])->name('admin.login.login');
+    Route::get('login', [AuthController::class, 'loginView'])->name('admin.login.index');
+    Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 });
 
 // Admin After Login
-Route::prefix('/admin')->middleware('auth:administrators')->group(function () {
-    // Route::get('/dashboard', [Admin\MainController::class, 'dashboard'])->name('admin.dashboard.view');
+Route::prefix('/admin')->middleware('auth.admin:administrators')->group(function () {
+    Route::view('/dashboard', 'admin/dashboard')->name('admin.dashboard.index');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+    Route::view('/sampleList', 'admin/sampleList')->name('admin.sample.list');
 
     Route::prefix('/profile')->group(function () {
         // Route::get('/password-edit', [Admin\ProfileController::class, 'passwordView'])->name('password.view');
