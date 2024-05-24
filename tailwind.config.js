@@ -37,10 +37,23 @@ module.exports = {
                 'mplus-rounded': ['M PLUS Rounded 1c'],
             },
             colors: {
-                // prefixname: {
-                    // **ハイフンは使えません**
-                    // colorname: '#000000',
-                // },
+                admin: {
+                    base: '#EAF0CE',            // for background
+                    main: '#CCE3CA',            // for main color
+                    accent: {
+                        type1: '#5D8334',       // mainly for accent button
+                        type1hover: '#86B950',
+                        type2: '#689D2F',       // mainly for accent background
+                        type2hover: '#87C743',
+                    },
+                    alert: '#B3001B',           // for alert & error
+                    text: {
+                        main: '#021301',        // for main text (written in layouts/admin)
+                        mainhover: '#3F533C',
+                        sub: '#282A28',         // for other text
+                        subhover: '#5A5E5A'
+                    },
+                },
             },
             screens: {
                 'pc': '1280px',

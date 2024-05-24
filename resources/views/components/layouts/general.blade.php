@@ -39,12 +39,6 @@
             @endif
         </div>
 
-        @if (isset($navigation))
-            <div class="">
-                <x-navigation />
-            </div>
-        @endif
-
         <main>
             {{ $slot }}
         </main>

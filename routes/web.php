@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 
 // root
 Route::get('/', function () {
-    return view('main');
+    return view('top');
 });
 
 // テンプレートとして以下用意したので、必要に応じてコメントアウトを外して下さい。また、不要な場合は削除してください。
@@ -79,7 +79,8 @@ Route::prefix('/admin')->middleware('auth.admin:administrators')->group(function
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-    Route::view('/sampleList', 'admin/sampleList')->name('admin.sample.list');
+    Route::view('/sampleList', 'admin/sample/sampleList')->name('admin.sample.list');
+    Route::view('/sampleDetail', 'admin/sample/sampleDetail')->name('admin.sample.detail');
 
     Route::prefix('/profile')->group(function () {
         // Route::get('/password-edit', [Admin\ProfileController::class, 'passwordView'])->name('password.view');
@@ -95,7 +96,3 @@ Route::prefix('/admin')->middleware('auth.admin:administrators')->group(function
     // });
 
 });
-
-Route::view('/test', 'test');
-// if you want test with parameter
-// Route::view('/test', 'test', ['foo' => 'bar']);
