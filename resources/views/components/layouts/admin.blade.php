@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- title & favicon --}}
-    <title>{{ config('app.name', 'Laravel') . "-" . $title }}</title>
+    <title>{{ config('app.name', 'Laravel') . " - " . $title }}</title>
     <link rel="shortcut icon" href="{{ config('app.url') }}/favicon.png">
 
     {{-- fonts --}}
@@ -22,7 +22,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-zen-maru bg-slate-100">
+<body class="font-zen-maru bg-admin-base text-admin-text-main">
     {{-- login page --}}
     @if (Request::is('admin/login'))
     <main class="w-screen h-screen">
@@ -31,9 +31,9 @@
 
     {{-- admin page --}}
     @else
-    <div class="bg-gray-100 flex h-screen">
+    <div class="flex h-screen">
         @if (!(Request::is('admin/dashboard')))
-        <aside class="hidden tablet:block fixed bg-white w-52 h-screen shadow-xl overflow-y-scroll hidden-scrollbar">
+        <aside class="hidden tablet:block fixed bg-admin-main w-52 h-screen shadow-admin-main shadow-xl overflow-y-scroll hidden-scrollbar">
             <x-admin.sidebar />
         </aside>
         <div class="tablet:ml-52"></div>
@@ -41,13 +41,13 @@
 
         <container class="w-full flex flex-col">
             {{-- desktop header --}}
-            <header class="hidden tablet:block sticky top-0 z-10 bg-white shadow-lg">
-                <x-admin.header />
+            <header class="hidden tablet:block sticky top-0 z-10 bg-admin-main shadow-admin-main shadow-md">
+                <x-admin.headerPC />
             </header>
 
             {{-- mobile header --}}
-            <header class="block tablet:hidden sticky top-0 z-10 bg-white shadow-lg">
-                <x-admin.hamburger />
+            <header class="block tablet:hidden sticky top-0 z-10 bg-admin-main shadow-admin-main shadow-md">
+                <x-admin.headerSP />
             </header>
 
             <main class="flex-grow overflow-y-auto">
@@ -56,5 +56,7 @@
         </container>
     </div>
     @endif
+
+    @stack('script')
 </body>
 </html>

@@ -1,4 +1,8 @@
-<x-layouts.global title="home">
+<x-layouts.general title="home">
+    <s-slot:title>
+        home
+    </s-slot:title>
+
     <x-slot name="header"></x-slot>
     <x-slot name="navigation"></x-slot>
 
@@ -7,9 +11,6 @@
             <h1 class="text-3xl text-black pb-6">Top page</h1>
 
             top page desu yo.
-            top page desu yo.
-            top page desu yo.
-            top page desu yo.
         </div>
     </div>
-</x-layouts.global>
+</x-layouts.general>
