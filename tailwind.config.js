@@ -77,6 +77,10 @@ module.exports = {
                         'display': 'none',          // Chrome, Safari
                     },
                 },
+                // text-align
+                '.text-last-justify': {
+                    'text-align-last': 'justify',
+                },
                 // sanmple(button)
                 '.btn-green': {
                     'color': '#1CB539',
