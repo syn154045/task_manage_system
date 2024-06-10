@@ -1,4 +1,8 @@
-<x-layouts.admin title="sampleList Page">
+<x-layouts.admin>
+    @push('title')
+        sampleDetail Page
+    @endpush
+
     @push('script')
         <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -9,6 +13,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         @vite('resources/js/handleFileinputArray.js')
     @endpush
+
     <style>
         .note-editable {
             background-color: rgba(255, 255, 255) !important;

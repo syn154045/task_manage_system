@@ -1,8 +1,13 @@
 <x-layouts.admin>
-    <x-slot:title>
+    @push('title')
         dashboard
-    </x-slot:title>
+    @endpush
 
+    {{-- 実装時削除
+        TODO :
+            1. Route -> href=""
+            2. $variableCount -> 通知バッヂが必要な場合は、compactで渡してください
+    --}}
     <h1 class="text-center mt-8 mx-2 tablet:mt-20 text-sm tablet:text-lg">
         @if (\Carbon\Carbon::now()->format('H') < 10 && \Carbon\Carbon::now()->format('H') > 5)
         <p>{{ Auth::guard('administrators')->user()->name }} さん　おはようございます。</p>
