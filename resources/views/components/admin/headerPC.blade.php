@@ -1,6 +1,10 @@
 <div class="flex justify-end items-center h-12 pr-5">
+    {{-- 実装時削除
+        TODO :
+            1. アカウント管理 -> 必要な場合は、route + controller + view一式実装してください
+    --}}
     <div class="relative inline-block">
-        <button id="dropdownButton" class="w-32 mr-3">
+        <button id="dropdownBtn" class="w-32 mr-3">
             <label for="dropdown" class="relative w-full h-10 cursor-pointer flex justify-center items-center duration-500 bg-admin-accent-type1 hover:bg-admin-accent-type1hover rounded-2xl text-sm">
                 <input type="button" id="dropdownCheck" class="hidden peer" onclick="dropdownToggle()">
                 <p class="w-[80%]">{{ Auth::guard('administrators')->user()->name }}</p>
@@ -27,7 +31,10 @@
 
 @push('script')
     <script>
-        const dropdownButton = document.getElementById('dropdownButton');
+        /**
+         * dropdown
+         */
+        const dropdownBtn = document.getElementById('dropdownBtn');
         const dropdownContainer = document.getElementById('dropdownContainer');
 
         function dropdownToggle() {
@@ -46,7 +53,7 @@
             }
         };
         // windowイベントリスナを起動させない
-        dropdownButton.addEventListener('click', function (event) {
+        dropdownBtn.addEventListener('click', function (event) {
             event.stopPropagation();
             dropdownToggle();
         });
@@ -56,7 +63,7 @@
 
         // ボタン外をクリックして閉じる
         window.addEventListener('click', function (event) {
-            if (!event.target.matches('#dropdownButton')) {
+            if (!event.target.matches('#dropdownBtn')) {
                 if (dropdownContainer.classList.contains('animate-fade-in')) {
                     dropdownContainer.classList.add('animate-fade-out');
                     setTimeout(() => {

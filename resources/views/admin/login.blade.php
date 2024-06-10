@@ -1,8 +1,13 @@
 <x-layouts.admin>
-    <x-slot:title>
+    @push('title')
         login
-    </x-slot:title>
+    @endpush
 
+    {{-- 実装時削除
+        TODO :
+            1. REMEMBER ME 機能 -> 不要な場合、Admin/AuthController/login の$rememberを削除してください
+            2. FORGOT PASSWORD 機能有無 -> 必要な場合、メール機能・forgot password画面など実装が必要です
+    --}}
     <div class="w-11/12 max-w-xl mx-auto pt-24 tablet:pt-40 pb-8 flex flex-col items-center justify-center">
         <h1 class="flex items-center text-4xl font-semibold mb-8 text-center">
             <i class="fas fa-sm fa-fingerprint"></i>
@@ -55,7 +60,7 @@
                     </label>
                 </div>
                 {{-- <div class="text-right">
-                    <a href="{{ route('password.request') }}" class="text-sm text-admin-accent-type1 rounded-md hover:underline focus:outline-none focus:font-semibold focus:text-admin-accent-type1hover focus:underline">
+                    <a href="{{ route('admin.password-request') }}" class="text-sm text-admin-accent-type1 rounded-md hover:underline focus:outline-none focus:font-semibold focus:text-admin-accent-type1hover focus:underline">
                         <p>Forgot Password?</p>
                     </a>
                 </div> --}}
@@ -71,7 +76,9 @@
 
     @push('script')
         <script>
-            // SVG check stroke controll
+            /**
+             * SVG check stroke controll
+             */
             const rememberCheck = document.getElementById('remember');
             const rememberCheckbox = rememberCheck.nextElementSibling;
             const rememberCheckboxSvg = (rememberCheck.nextElementSibling.querySelector('path'));
@@ -92,6 +99,7 @@
                 }
             });
 
+            // stroke move
             function rememberToggle() {
                 if (rememberCheck.checked) {
                     rememberCheckboxSvg.style.strokeDasharray = '70.5096664428711 9999999';
@@ -102,7 +110,9 @@
                 }
             };
 
-            // password visible
+            /**
+             * password visiblity
+             */
             const passwordVisible = document.getElementById('passwordVisible');
             const passwordBox = passwordVisible.nextElementSibling;
 
@@ -117,7 +127,6 @@
                     passwordBox.type = 'password';
                 }
             });
-
         </script>
     @endpush
 </x-layouts.admin>
