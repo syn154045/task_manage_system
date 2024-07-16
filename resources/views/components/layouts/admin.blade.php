@@ -22,8 +22,8 @@
 </head>
 
 <body class="font-zen-maru bg-admin-base text-admin-text-main">
-    {{-- login page --}}
-    @if (Request::is('admin/login'))
+    {{-- signin / signup page --}}
+    @if (Request::is('sign-in') || Request::is('sign-up'))
     <main class="w-screen h-screen">
         {{ $slot }}
     </main>
@@ -31,10 +31,10 @@
     {{-- admin page --}}
     @else
     <div class="flex h-screen">
-        {{-- dashboardはsideBarを使用しません --}}
-        @if (!(Request::is('admin/dashboard')))
+        {{-- home画面はsideBarを使用しません --}}
+        @if (!(Request::is('/')))
         <aside class="hidden tablet:block fixed bg-admin-main w-52 h-screen shadow-admin-main shadow-xl overflow-y-scroll hidden-scrollbar">
-            <x-admin.sidebar />
+            <x-sidebar />
         </aside>
         <div class="tablet:ml-52"></div>
         @endif
@@ -42,12 +42,12 @@
         <container class="w-full flex flex-col">
             {{-- desktop header --}}
             <header class="hidden tablet:block sticky top-0 z-20 bg-admin-main shadow-admin-main shadow-md">
-                <x-admin.headerPC />
+                <x-headerPC />
             </header>
 
             {{-- mobile header --}}
             <header class="block tablet:hidden sticky top-0 z-20 bg-admin-main shadow-admin-main shadow-md">
-                <x-admin.headerSP />
+                <x-headerSP />
             </header>
 
             {{-- main contents --}}

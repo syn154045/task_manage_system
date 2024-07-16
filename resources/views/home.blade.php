@@ -1,6 +1,6 @@
 <x-layouts.admin>
     @push('title')
-        dashboard
+        home
     @endpush
 
     {{-- 実装時削除
@@ -23,24 +23,24 @@
     </h2>
 
     <div class="w-full max-w-3xl mx-auto mt-10 mb-12 grid grid-cols-1 tablet:grid-cols-2 gap-6 tablet:gap-x-8 tablet:gap-y-10 tablet:justify-around tablet:text-lg">
-        <a href="{{ route('admin.sample.list')}}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent-type1 rounded-3xl hover:bg-admin-accent-type1hover transition-all duration-300">
-            <i class="fas fa-earth-asia w-1/6"></i>
-            <p class="w-5/6 pl-1">〇〇一覧</p>
+        <a href="{{ route('api-info.list')}}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent rounded-3xl hover:bg-admin-accent/60 transition-all duration-300">
+            <i class="fas fa-wifi w-1/6"></i>
+            <p class="w-5/6 pl-1">API情報管理</p>
         </a>
-        <a href="" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent-type1 rounded-3xl hover:bg-admin-accent-type1hover transition-all duration-300">
-            <i class="fas fa-location-dot w-1/6"></i>
-            <p class="w-5/6 pl-1">△△一覧</p>
+        <a href="{{ route('item.list') }}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent rounded-3xl hover:bg-admin-accent/60 transition-all duration-300">
+            <i class="fas fa-box-open w-1/6"></i>
+            <p class="w-5/6 pl-1">商品情報一覧</p>
         </a>
-        <a href="" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent-type1 rounded-3xl hover:bg-admin-accent-type1hover transition-all duration-300">
-            <i class="fas fa-calendar-check w-1/6"></i>
-            <p class="w-5/6 pl-1">××一覧</p>
+        <a href="{{ route('order.list') }}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent rounded-3xl hover:bg-admin-accent/60 transition-all duration-300">
+            <i class="fas fa-file-lines w-1/6"></i>
+            <p class="w-5/6 pl-1">受注情報一覧</p>
         </a>
-        <a href="" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent-type1 rounded-3xl hover:bg-admin-accent-type1hover transition-all duration-300 relative">
-            <i class="fas fa-paper-plane w-1/6"></i>
-            <p class="w-5/6 pl-1">お問合せ一覧</p>
+        <a href="{{ route('task.list') }}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent rounded-3xl hover:bg-admin-accent/60 transition-all duration-300 relative">
+            <i class="fas fa-list-check w-1/6"></i>
+            <p class="w-5/6 pl-1">ラベル印刷タスク状況</p>
             {{-- @if(!empty($variableCount)) --}}
             <div class="absolute top-0 -right-2 tablet:-right-1 w-4 h-5 flex justify-center items-center">
-                <i class="fas fa-2xl fa-comment text-admin-alert"></i>
+                <i class="fas fa-2xl fa-comment text-elem-alert"></i>
                 <p class="text-xs text-white absolute -top-[0.05rem]">
                     {{-- {{ $variableCount }} --}}20
                 </p>

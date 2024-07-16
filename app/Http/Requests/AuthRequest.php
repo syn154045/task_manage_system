@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class AdminAuthRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,25 @@ class AdminAuthRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             "email" => ['required', 'email', 'max:255'],
             "password" => ['required', 'min:6', Password::min(6)->letters()->numbers()->symbols()],
-            "remember" => ['nullable'],
         ];
+        if ($this->has('name')) {
+            $rules["name"] = ['required', 'max:255'];
+        }
+        if ($this->has('remember')) {
+            $rules["remember"] = ['nullable'];
+        }
+
+        return $rules;
     }
 
     public function messages()
     {
         return [
+            'name.required' => '名前が入力されていません',
+            'name.max' => '名前は255文字以内で入力してください',
             'email.required' => 'メールアドレスが入力されていません',
             'email.email' => 'メールアドレスが正しくありません',
             'email.max' => 'メールアドレスは255文字以内で入力してください。',

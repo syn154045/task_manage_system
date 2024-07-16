@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Item;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdministratorSeeder::class,
         ]);
+        Item::factory(10)->create();
     }
 }

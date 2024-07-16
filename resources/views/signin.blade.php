@@ -1,35 +1,35 @@
 <x-layouts.admin>
     @push('title')
-        login
+        sign-in
     @endpush
 
     {{-- 実装時削除
         TODO :
-            1. REMEMBER ME 機能 -> 不要な場合、Admin/AuthController/login の$rememberを削除してください
+            1. REMEMBER ME 機能 -> 不要な場合、Admin/AuthController/sign の$rememberを削除してください
             2. FORGOT PASSWORD 機能有無 -> 必要な場合、メール機能・forgot password画面など実装が必要です
     --}}
     <div class="w-11/12 max-w-xl mx-auto pt-24 tablet:pt-40 pb-8 flex flex-col items-center justify-center">
         <h1 class="flex items-center text-4xl font-semibold mb-8 text-center">
-            <i class="fas fa-sm fa-fingerprint"></i>
-            <p class="pl-5">Log In</p>
+            <i class="fas fa-sm fa-shield-halved"></i>
+            <p class="pl-5">Sign In</p>
         </h1>
 
-        <form action="{{ route('admin.login') }}" method="POST" class="relative w-full pt-6">
+        <form action="{{ route('signin') }}" method="POST" class="relative w-full pt-6">
             @csrf
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-admin-alert opacity-80">
-                @error('login')
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-elem-alert opacity-80">
+                @error('signin')
                     {{ $message }}
                 @endif
             </div>
 
             <div class="relative mt-10">
                 <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="email" class="peer p-2 w-full outline-none bg-transparent placeholder:text-transparent">
-                <div class="h-[0.125rem] bg-admin-text-sub peer-focus:bg-gradient-to-r from-admin-accent-type2 to-admin-accent-type2hover transition-colors duration-300"></div>
-                <label for="email" class="block absolute -top-3 cursor-none text-sm transition-all duration-500 peer-focus:text-admin-text-subhover peer-focus:-top-3 peer-focus:text-sm peer-focus:transition-all peer-focus:duration-500 peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg peer-placeholder-shown:cursor-text">
+                <div class="h-[0.125rem] bg-admin-accent2 peer-focus:bg-gradient-to-r from-admin-accent to-admin-accent2 transition-colors duration-300"></div>
+                <label for="email" class="block absolute -top-3 cursor-none text-sm transition-all duration-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:transition-all peer-focus:duration-500 peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg peer-placeholder-shown:cursor-text">
                     Email
                 </label>
                 @error('email')
-                    <div class="absolute top-12 text-xs text-admin-alert opacity-80">
+                    <div class="absolute top-12 text-xs text-elem-alert opacity-80">
                         {{ $message }}
                     </div>
                 @enderror
@@ -38,12 +38,12 @@
             <div class="relative mt-10">
                 <i id="passwordVisible" class="fas fa-eye-slash absolute top-3 right-4 cursor-pointer"></i>
                 <input type="password" id="password" name="password" placeholder="pass" class="peer p-2 w-full outline-none bg-transparent placeholder:text-transparent">
-                <div class="h-[0.125rem] bg-admin-text-sub peer-focus:bg-gradient-to-r from-admin-accent-type2 to-admin-accent-type2hover transition-colors duration-300"></div>
-                <label for="password" class="block absolute -top-3 cursor-none text-sm transition-all duration-500 peer-focus:text-admin-text-subhover peer-focus:-top-3 peer-focus:text-sm peer-focus:transition-all peer-focus:duration-500 peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg peer-placeholder-shown:cursor-text">
+                <div class="h-[0.125rem] bg-admin-accent2 peer-focus:bg-gradient-to-r from-admin-accent to-admin-accent2 transition-colors duration-300"></div>
+                <label for="password" class="block absolute -top-3 cursor-none text-sm transition-all duration-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:transition-all peer-focus:duration-500 peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg peer-placeholder-shown:cursor-text">
                     Password
                 </label>
                 @error('password')
-                    <div class="absolute top-12 text-xs text-admin-alert opacity-80">
+                    <div class="absolute top-12 text-xs text-elem-alert opacity-80">
                         {{ $message }}
                     </div>
                 @enderror
@@ -53,9 +53,11 @@
                 <div class="relative cursor-pointer flex">
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="appearance-none peer" onclick="rememberToggle()">
                     <svg viewBox="0 0 64 64" class="w-5 h-5">
-                        <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="fill-none stroke-admin-accent-type1 stroke-[6] transition-all duration-500" style="stroke-dasoffset: 0; stroke-dasharray: 241 9999999;"></path>
+                        <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938"
+                            class="fill-none stroke-admin-text-main stroke-[6] transition-all duration-500" style="stroke-dasoffset: 0; stroke-dasharray: 241 9999999;">
+                        </path>
                     </svg>
-                    <label for="remember" class="pl-2 text-sm text-admin-accent-type1 cursor-pointer peer-focus:underline peer-focus:text-admin-accent-type1hover">
+                    <label for="remember" class="pl-2 text-sm text-admin-text-main cursor-pointer peer-focus:underline">
                         Remember Me
                     </label>
                 </div>
@@ -66,10 +68,15 @@
                 </div> --}}
             </div>
 
-            <div class="w-1/2 mx-auto mt-12">
-                <button type="submit" class="w-full bg-admin-accent-type1 p-2 rounded-md hover:bg-admin-accent-type1hover focus:outline-none focus:bg-admin-accent-type1hover hover:text-admin-text-mainhover focus:text-admin-text-mainhover transition-colors duration-300">
+            <div class="w-full flex justify-between mx-auto mt-12 items-center">
+                <button type="submit" class="ml-auto w-1/2 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
                     Sign In
                 </button>
+                <div class="w-1/3 pl-8">
+                    <a href="{{ route('signin') }}" class="border-b border-admin-text-main pb-1 hover:opacity-60 transition-opacity duration-300">
+                        Sign Up
+                    </a>
+                </div>
             </div>
         </form>
     </div>

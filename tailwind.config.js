@@ -38,21 +38,19 @@ module.exports = {
             },
             colors: {
                 admin: {
-                    base: '#EAF0CE',            // for background
-                    main: '#CCE3CA',            // for main color
-                    accent: {
-                        type1: '#5D8334',       // mainly for accent button
-                        type1hover: '#86B950',
-                        type2: '#689D2F',       // mainly for accent background
-                        type2hover: '#87C743',
-                    },
-                    alert: '#B3001B',           // for alert & error
+                    base: '#B4B4B8',
+                    main: '#C7C8CC',
+                    accent: '#E3E1D9',
+                    accent2: '#F2EFE5',
                     text: {
-                        main: '#021301',        // for main text (written in layouts/admin)
-                        mainhover: '#3F533C',
-                        sub: '#282A28',         // for other text
-                        subhover: '#5A5E5A'
-                    },
+                        main: '#4B4B47',
+                        sub: '#3C3C39'
+                    }
+                },
+                elem: {
+                    alert: '#F34336', // fa8072
+                    success: '#8fbc8f', // 73fa80
+                    info: '#8f8fbd', // 8073fa
                 },
             },
             screens: {

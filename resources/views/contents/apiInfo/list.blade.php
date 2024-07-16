@@ -151,7 +151,7 @@
                 <div class="flex-none tablet:flex pl-2 w-20 tablet:w-28 pc:w-40 space-y-2 tablet:space-y-0 pc:space-x-1 justify-between">
                     <div class="flex items-center">
                         {{-- routeヘルパーの第二引数にidを指定 --}}
-                        <a href="{{ route('admin.sample.detail', 1)}}" class="px-2 pc:px-4 py-2 w-full rounded-xl border-2 border-admin-accent-type1 text-admin-accent-type1 hover:bg-admin-accent-type1hover hover:bg-opacity-20 transition-all duration-500 text-sm pc:text-base text-last-justify">
+                        <a href="{{ route('api-info.detail', 1)}}" class="px-2 pc:px-4 py-2 w-full rounded-xl border-2 border-admin-accent-type1 text-admin-accent-type1 hover:bg-admin-accent-type1hover hover:bg-opacity-20 transition-all duration-500 text-sm pc:text-base text-last-justify">
                             編集
                         </a>
                     </div>
