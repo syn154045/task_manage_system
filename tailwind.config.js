@@ -102,12 +102,5 @@ module.exports = {
                 },
             })
         }),
-        require("daisyui"),
     ],
-    daisyui: {
-        prefix: 'dui-',
-        themes: [
-            "light",
-        ],
-    },
 }

@@ -20,9 +20,9 @@ class AdministratorSeeder extends Seeder
     {
         DB::table('administrators')->insert([
             'id' => Str::ulid(),
-            'name' => '大阪　太郎',
-            'email' => 'admin001@example.com',
-            'password' => Hash::make('pass%001'),
+            'name' => '京都　舞子',
+            'email' => 'admin000@example.com',
+            'password' => Hash::make('pass!123'),
             'created_at' => CarbonImmutable::now(),
         ]);
     }

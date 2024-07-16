@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- title & favicon --}}
-    <title>{{ config('app.name', 'Laravel') . "-" . $title }}</title>
+    <title>{{ config('app.name', 'Laravel') . "-"}}@stack('title')</title>
     <link rel="shortcut icon" href="{{ asset('/favicon.png') }}">
 
     {{-- fonts --}}
