@@ -39,7 +39,11 @@ Route::middleware('auth.admin:administrators')->group(function () {
 
     Route::prefix('items')->group(function () {
         Route::get('/list', [ItemController::class, 'list'])->name('item.list');
-        Route::get('/detail', [ItemController::class, 'detail'])->name('item.detail');
+        Route::get('/new', [ItemController::class, 'new'])->name('item.new');
+        Route::post('/store', [ItemController::class, 'store'])->name('item.store');
+        Route::get('/{id}', [ItemController::class, 'edit'])->name('item.edit');
+        Route::post('/update/{id}', [ItemController::class, 'update'])->name('item.update');
+        Route::post('/delete/{id}', [ItemController::class, 'delete'])->name('item.delete');
     });
 
     Route::prefix('orders')->group(function () {

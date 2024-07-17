@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    private Order $order;
+
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+
+
     /**
      * 受注情報 list
      */
     public function list()
     {
-        return view ('contents/orders/list');
+        $res = $this->order->get();
+        return view ('contents/orders/list', compact('res'));
     }
 
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignUlid('order_id')->nullable()->constrained();
+            $table->foreignUlid('item_id')->nullable()->constrained();
             $table->string('print_data');
             $table->timestamps();
             $table->softDeletes();

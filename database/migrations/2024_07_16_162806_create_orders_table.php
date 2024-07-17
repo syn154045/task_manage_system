@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('item_id')->nullable()->constrained();
             $table->string('shop_name');
+            $table->string('order_detail');
             $table->timestamps();
             $table->softDeletes();
         });

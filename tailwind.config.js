@@ -40,17 +40,17 @@ module.exports = {
                 admin: {
                     base: '#B4B4B8',
                     main: '#C7C8CC',
-                    accent: '#E3E1D9',
-                    accent2: '#F2EFE5',
+                    accent: '#FFA400',
+                    accent2: '#2A2a72',
                     text: {
                         main: '#4B4B47',
                         sub: '#3C3C39'
                     }
                 },
                 elem: {
-                    alert: '#F34336', // fa8072
-                    success: '#8fbc8f', // 73fa80
-                    info: '#8f8fbd', // 8073fa
+                    alert: '#4d030c', // fa8072
+                    success: '#123d15', // 73fa80
+                    info: '#0f143b', // 8073fa
                 },
             },
             screens: {

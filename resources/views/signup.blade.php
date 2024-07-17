@@ -60,12 +60,12 @@
                 @enderror
             </div>
 
-            <div class="flex justify-between w-full mx-auto mt-12 items-center">
-                <button type="submit" class="ml-auto w-1/2 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
+            <div class="flex justify-center w-full mx-auto mt-12 items-center relative">
+                <button type="submit" class="w-1/3 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
                     Sign Up
                 </button>
-                <div class="w-1/3 pl-8">
-                    <a href="{{ route('signin') }}" class="border-b border-admin-text-main pb-1 hover:opacity-60 transition-opacity duration-300">
+                <div class="absolute right-0">
+                    <a href="{{ route('signin') }}" class="border-b px-2 border-admin-text-main pb-1 hover:opacity-60 transition-opacity duration-300">
                         Sign In
                     </a>
                 </div>
