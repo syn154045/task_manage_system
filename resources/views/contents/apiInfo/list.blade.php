@@ -12,7 +12,7 @@
     <div class="w-[90%] tablet:w-full mx-auto mt-8">
         <div class="w-full flex justify-between items-center relative">
             <h1 class="tablet:pl-2 text-2xl font-semibold">
-                〇〇一覧
+                工事中！
             </h1>
             {{-- 1. 不要な場合削除　ここから --}}
             <div id="searchBtn" class="tablet:mr-4 pc:mr-10 bg-admin-main rounded-t-xl transition-all duration-500 hover:bg-opacity-40">
@@ -88,7 +88,6 @@
             {{-- 1. 不要な場合削除　ここまで --}}
         </div>
         <h2 class="pt-2 tablet:pl-10 text-sm">
-            〇〇画面にて表示するコンテンツの管理
         </h2>
 
 

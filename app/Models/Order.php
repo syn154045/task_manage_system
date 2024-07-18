@@ -15,8 +15,15 @@ class Order extends Model
     protected $keyType = "string";
     public $incrementing = false;
 
-    protected $guarded = [
-        "id",
+    protected $casts = [
+        'output_status' => 'boolean',
+    ];
+
+    protected $fillable = [
+        'id',
+        'shop_name',
+        'order_detail',
+        'output_status',
     ];
 
     // public static function booted()

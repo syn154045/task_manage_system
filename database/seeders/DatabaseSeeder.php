@@ -21,6 +21,5 @@ class DatabaseSeeder extends Seeder
             AdministratorSeeder::class,
         ]);
         Item::factory(10)->create();
-        Order::factory(20)->create();
     }
 }

@@ -48,7 +48,12 @@ Route::middleware('auth.admin:administrators')->group(function () {
 
     Route::prefix('orders')->group(function () {
         Route::get('/list', [OrderController::class, 'list'])->name('order.list');
-        Route::get('/detail', [OrderController::class, 'detail'])->name('order.detail');
+        Route::post('/csv-upload', [OrderController::class, 'csvUpload'])->name('order.csv-upload');
+        Route::post('/task-output', [OrderController::class, 'taskOutput'])->name('order.task-output');
+        // order edit / update / delete は未実装（ルーティングのみ通しています）
+        Route::get('/{id}', [OrderController::class, 'edit'])->name('order.edit');
+        Route::post('/update/{id}', [OrderController::class, 'update'])->name('order.update');
+        Route::post('/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
     });
 
     Route::prefix('tasks')->group(function () {

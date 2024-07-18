@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
  */
 class ItemFactory extends Factory
 {
+    private static int $seq = 1;
+
     /**
      * Define the model's default state.
      *
@@ -19,9 +21,10 @@ class ItemFactory extends Factory
     {
         return [
             'id' => Str::ulid(),
-            'name' => fake()->colorName(),
+            'name' => 'sample'.self::$seq++,
             'code' => fake()->ean8(),
             'type' => fake()->monthName(),
+            'description' => fake()->sentence(),
         ];
     }
 }

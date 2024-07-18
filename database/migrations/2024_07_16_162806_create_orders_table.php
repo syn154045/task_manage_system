@@ -17,6 +17,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('shop_name');
             $table->string('order_detail');
+            $table->boolean('output_status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,10 +16,10 @@
             </h1>
         </div>
         <div class="w-full flex justify-end items-center relative mt-2">
-            <div class="text-sm mr-4">
+            <div class="text-sm mr-4 font-bold">
                 @error('err')
                 <p class="text-elem-alert">
-                    {{ $message }}
+                    *! {{ $message }}
                 </p>
                 @enderror
                 @if(session('message'))
