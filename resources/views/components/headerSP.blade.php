@@ -89,14 +89,14 @@
                     <a href="{{ route('task.list') }}" class="jsMenuItems w-full hidden items-center relative">
                         <i class="fas fa-list-check w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">ラベル印刷タスク状況</p>
-                        {{-- @if(!empty($variableCount)) --}}
+                        @if(!empty($taskCount))
                         <div class="absolute z-10 -top-1 -right-4 w-4 h-4 flex justify-center items-center">
                             <i class="fas fa-2xl fa-comment text-elem-alert"></i>
                             <p class="text-xs text-white absolute -top-[0.075rem]">
-                                {{-- {{ $variableCount }} --}}20
+                                {{ $taskCount }}
                             </p>
                         </div>
-                        {{-- @endif --}}
+                        @endif
                         @if (Request::is('tasks/*'))
                         <div class="absolute -left-2 w-[42vw] h-10 bg-admin-accent2/30"></div>
                         @endif

@@ -47,13 +47,13 @@
             <div class="absolute -left-5 w-52 h-full bg-admin-accent2/30"></div>
             @endif
         </a>
-        {{-- @if(!empty($variableCount)) --}}
+        @if(!empty($taskCount))
         <div class="absolute z-10 top-0 right-3 w-4 h-4 flex justify-center items-center">
             <i class="fas fa-2xl fa-comment text-elem-alert"></i>
             <p class="text-xs text-white absolute -top-[0.05rem]">
-                {{-- {{ $variableCount }} --}}20
+                {{ $taskCount }}
             </p>
         </div>
-        {{-- @endif --}}
+        @endif
     </div>
 </nav>

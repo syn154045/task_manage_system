@@ -28,7 +28,7 @@ Route::post('sign-up', [AuthController::class, 'signup'])->name('signup');
 
 // Admin After Login
 Route::middleware('auth.admin:administrators')->group(function () {
-    Route::view('/', 'home')->name('home');
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::post('/sign-out', [AuthController::class, 'signout'])->name('signout');
 
@@ -58,6 +58,12 @@ Route::middleware('auth.admin:administrators')->group(function () {
 
     Route::prefix('tasks')->group(function () {
         Route::get('/list', [TaskController::class, 'list'])->name('task.list');
+        Route::post('/completion-report', [TaskController::class, 'completionReport'])->name('task.completion-report');
+        Route::get('/list-completed', [TaskController::class, 'list'])->name('task.list-completed');
+        // task edit / update / delete は未実装（ルーティングのみ通しています）
+        Route::get('{id}', [TaskController::class, 'edit'])->name('task.edit');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('task.update');
+        Route::post('/delete/{id}', [TaskController::class, 'delete'])->name('task.delete');
     });
 
     // profile edit

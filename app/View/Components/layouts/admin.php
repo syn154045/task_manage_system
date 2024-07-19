@@ -2,21 +2,20 @@
 
 namespace App\View\Components\layouts;
 
+use App\Models\Task;
 use Illuminate\View\Component;
 
 class admin extends Component
 {
+    private Task $task;
     /**
      * Create a new component instance.
-     * if you use app\Models\Contact instance;
-     * private Contact $contact;
-     * and then -> public function __construct(Contact $contact)
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Task $task)
     {
-        // $this->contact = $contact;
+        $this->task = $task;
     }
 
     /**
@@ -26,8 +25,10 @@ class admin extends Component
      */
     public function render()
     {
-        // $contactCount = $this->contact->count();
-        return view('components.layouts.admin');
-        // return view('components.layouts.admin', compact('contactCount'));
+        $taskCount = $this->task
+        ->where('completion_status',0)
+        ->count();
+
+        return view('components.layouts.admin', compact('taskCount'));
     }
 }

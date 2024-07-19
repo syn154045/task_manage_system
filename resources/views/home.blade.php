@@ -3,11 +3,6 @@
         home
     @endpush
 
-    {{-- 実装時削除
-        TODO :
-            1. Route -> href=""
-            2. $variableCount -> 通知バッヂが必要な場合は、compactで渡してください
-    --}}
     <h1 class="text-center mt-8 mx-2 tablet:mt-20 text-sm tablet:text-lg">
         @if (\Carbon\Carbon::now()->format('H') < 10 && \Carbon\Carbon::now()->format('H') > 5)
         <p>{{ Auth::guard('administrators')->user()->name }} さん　おはようございます。</p>
@@ -38,14 +33,14 @@
         <a href="{{ route('task.list') }}" class="flex justify-center items-center w-[85%] h-16 tablet:h-20 mx-auto p-4 bg-admin-accent rounded-3xl hover:bg-admin-accent/60 transition-all duration-300 relative">
             <i class="fas fa-list-check w-1/6"></i>
             <p class="w-5/6 pl-1">ラベル印刷タスク状況</p>
-            {{-- @if(!empty($variableCount)) --}}
+            @if(!empty($taskCount))
             <div class="absolute top-0 -right-2 tablet:-right-1 w-4 h-5 flex justify-center items-center">
                 <i class="fas fa-2xl fa-comment text-elem-alert"></i>
                 <p class="text-xs text-white absolute -top-[0.05rem]">
-                    {{-- {{ $variableCount }} --}}20
+                    {{ $taskCount }}
                 </p>
             </div>
-            {{-- @endif --}}
+            @endif
         </a>
     </div>
 </x-layouts.admin>

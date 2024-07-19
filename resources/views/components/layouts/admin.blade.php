@@ -34,7 +34,7 @@
         {{-- home画面はsideBarを使用しません --}}
         @if (!(Request::is('/')))
         <aside class="hidden tablet:block fixed bg-admin-main w-52 h-screen shadow-admin-main shadow-xl overflow-y-scroll hidden-scrollbar">
-            <x-sidebar />
+            <x-sidebar :taskCount=$taskCount />
         </aside>
         <div class="tablet:ml-52"></div>
         @endif
@@ -47,7 +47,7 @@
 
             {{-- mobile header --}}
             <header class="block tablet:hidden sticky top-0 z-20 bg-admin-main shadow-admin-main shadow-md">
-                <x-headerSP />
+                <x-headerSP :taskCount=$taskCount />
             </header>
 
             {{-- main contents --}}
