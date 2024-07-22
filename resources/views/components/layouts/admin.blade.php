@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- title & favicon --}}
-    <title>{{ config('app.name', 'Laravel') . " - " }}@stack('title')</title>
+    <title>{{ config('app.name', 'Syn') . " | " }}@stack('title')</title>
     <link rel="shortcut icon" href="{{ config('app.url') }}/favicon.ico">
 
     {{-- fonts --}}
@@ -21,16 +21,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-zen-maru bg-admin-base text-admin-text-main">
+<body class="font-zen-maru bg-admin-base text-admin-text-main min-h-screen w-full">
     {{-- signin / signup page --}}
     @if (Request::is('sign-in') || Request::is('sign-up'))
-    <main class="w-screen h-screen">
+    <main class="">
         {{ $slot }}
     </main>
 
     {{-- admin page --}}
     @else
-    <div class="flex h-screen">
+    <div class="flex h-full">
         {{-- home画面はsideBarを使用しません --}}
         @if (!(Request::is('/')))
         <aside class="hidden tablet:block fixed bg-admin-main w-52 h-screen shadow-admin-main shadow-xl overflow-y-scroll hidden-scrollbar">
@@ -51,13 +51,13 @@
             </header>
 
             {{-- main contents --}}
-            <main class="flex-grow overflow-y-auto">
+            <main class="overflow-y-auto">
                 {{ $slot }}
             </main>
         </container>
     </div>
     @endif
-
+    <x-footer />
     @stack('script')
 </body>
 </html>

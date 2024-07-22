@@ -1,52 +1,55 @@
 <x-layouts.admin>
     @push('title')
-        商品情報一覧
+        受注情報一覧
     @endpush
 
-    {{-- 実装時削除してください
-        TODO :
-            1. 検索機能 -> 不要な場合、該当箇所削除してください / また、テキスト検索・ラジオボタン・チェックボックスを設置していますが、適宜必要なアイテムを使用してください
-            2. contents -> 必要な項目数をウィンドウ幅に応じて設定してください (tablet = 600px- / md = 768px- / lg = 1024px- / pc = 1280px-)
-            3. modal, detail -> idを変数に置換してください
-    --}}
-    <div class="w-[90%] tablet:w-full mx-auto mt-8">
-        <div class="w-full flex justify-between items-center relative">
-            <h1 class="tablet:pl-2 text-2xl font-semibold">
-                受注情報一覧
-            </h1>
-        </div>
-        <div class="w-full flex justify-end items-center relative mt-2 tablet:pl-4">
-            <div class="text-sm mr-4 grow-[1] font-bold">
-                @error('err')
-                <p class="text-elem-alert">
-                    *! {{ $message }}
-                </p>
-                @enderror
-                @if(session('message'))
-                <p class="text-elem-success">
-                    {{ session('message') }}
-                </p>
-                @endif
+    <div class="w-[90%] tablet:w-full mx-auto mt-8 tablet:px-4">
+        {{-- Header --}}
+        <div class="w-full flex flex-col justify-between items-start">
+            {{-- title & messages --}}
+            <div class="flex w-full h-10 justify-start items-baseline">
+                <h1 class="text-2xl font-semibold text-nowrap">
+                    受注情報一覧
+                </h1>
+                <div class="text-xs tablet:text-sm ml-4 tablet:ml-8 grow-[1] font-semibold">
+                    @error('err')
+                    <p class="text-elem-alert">
+                        *! {{ $message }}
+                    </p>
+                    @enderror
+                    @if(session('message'))
+                    <p class="text-elem-success">
+                        {{ session('message') }}
+                    </p>
+                    @endif
+                </div>
             </div>
-            <form action="{{ route('order.csv-upload') }}" method="POST" enctype="multipart/form-data" class="flex items-center justify-end space-x-2 tablet:space-x-4 tablet:mr-4 grow-0">
-                @csrf
-                <input type="file" name="csvFile" id="csvFile" class="text-sm" accept=".csv,.xlsx">
-                <button type="submit" class="bg-admin-accent tablet:mr-4 px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
-                    CSV取込
+            {{-- option 1 --}}
+            <div class="w-full flex flex-col-reverse lg:flex-row justify-end items-end lg:items-center relative mt-6 h-10">
+                <form action="{{ route('order.csv-upload') }}" method="POST" enctype="multipart/form-data" class="flex items-center justify-end space-x-2 tablet:space-x-4 grow-0">
+                    @csrf
+                    <input type="file" name="csvFile" id="csvFile" class="text-xs tablet:text-sm" accept=".csv,.xlsx">
+                    <button type="submit" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
+                        CSV取込
+                    </button>
+                </form>
+            </div>
+            {{-- option 2 --}}
+            <div class="mt-6 h-10 w-full flex justify-between">
+                <button type="button" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
+                    受注情報削除
                 </button>
-            </form>
-        </div>
-        <div class="mt-2 pl-4">
-            <form action="{{ route('order.task-output') }}" method="POST">
-                @csrf
-                <button type="submit" class="bg-admin-accent tablet:mr-4 px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
-                    タスク出力
-                </button>
-            </form>
+                <form action="{{ route('order.task-output') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
+                        タスク出力
+                    </button>
+                </form>
+            </div>
         </div>
 
-        {{-- table --}}
-        <section class="w-full mx-auto mt-12 mb-10 tablet:px-4">
+        {{-- List --}}
+        <section class="w-full mx-auto mt-8 tablet:mt-12">
             {{-- tablet:header --}}
             <header class="hidden tablet:flex px-4 py-2 bg-admin-base font-bold border-t border-b-2 border-admin-accent-type2">
                 <div class="w-20 pc:w-24 text-center">受信日</div>
@@ -112,7 +115,7 @@
         </section>
 
         {{-- modal --}}
-        <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
+        {{-- <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
             <div class="py-4 px-3 tablet:px-6 bg-stone-50 rounded-xl shadow-2xl flex flex-col">
                 <div class="flex justify-between items-center">
                     <h2 class="text-xs border-b border-admin-text-sub pr-10">
@@ -132,13 +135,12 @@
                     <button type="button" id="confirmDelete" class="px-3 py-1 w-20 border border-elem-alert rounded-lg text-elem-alert hover:text-white hover:bg-elem-alert/80 transition-colors duration-300">
                         はい
                     </button>
-                    {{-- deleteform --}}
                     <form id="deleteForm" action="" method="POST" class="hidden">
                         @csrf
                     </form>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
 
     @push('script')

@@ -3,52 +3,58 @@
         タスク状況
     @endpush
 
-    <div class="w-[90%] tablet:w-full mx-auto mt-8">
-        <div class="w-full flex flex-col justify-between items-start relative">
-            <h1 class="tablet:pl-2 text-2xl font-semibold">
-                ラベル印刷タスク状況 {{ $isCompleted ? '（完了済）' : '' }}
-            </h1>
-            <div class="mt-6 tablet:pl-8 w-1/5 min-w-60">
-                <select id="typeSelect" name="type" class="w-full h-12 tablet:h-8 px-2 rounded-xl bg-admin-accent font-semibold text-elem-alert">
-                    <option value="" class="font-semibold text-elem-alert">全件</option>
+    <div class="w-[90%] tablet:w-full mx-auto mt-8 tablet:px-4">
+        {{-- Header --}}
+        <div class="w-full flex flex-col justify-between items-start">
+            {{-- title & messages --}}
+            <div class="w-full flex h-10 jusitfy-start items-baseline">
+                <h1 class="text-2xl font-semibold text-nowrap">
+                    ラベル印刷タスク状況 {{ $isCompleted ? '（完了済）' : '' }}
+                </h1>
+                <div class="text-xs tablet:text-sm ml-4 tablet:ml-8 grow-[1] font-semibold">
+                    @error('err')
+                    <p class="text-elem-alert">
+                        *! {{ $message }}
+                    </p>
+                    @enderror
+                    @if(session('message'))
+                    <p class="text-elem-success">
+                        {{ session('message') }}
+                    </p>
+                    @endif
+                </div>
+            </div>
+            {{-- option 1 --}}
+            <div class="mt-6 h-10">
+                <select id="typeSelect" name="type" class="w-full h-10 px-4 rounded-xl bg-admin-accent font-semibold cursor-pointer">
+                    <option value="" class="text-sm font-semibold">全件</option>
                     @forelse ($itemTypes as $type)
-                    <option value="{{ $type }}" class="text-sm {{ isset($typeCounts[$type]) ? 'font-semibold text-elem-alert' : '' }}" {{ isset($typeCounts[$type]) ? '' : 'disabled' }} >
+                    <option value="{{ $type }}" class="text-sm {{ isset($typeCounts[$type]) ? 'font-semibold' : '' }}" {{ isset($typeCounts[$type]) ? '' : 'disabled' }} >
                         {{ $type }} ( {{ isset($typeCounts[$type]) ? $typeCounts[$type]->count() : 0 }} )
                     </option>
                     @empty
                     @endforelse
                 </select>
             </div>
-        </div>
-
-
-        {{-- table --}}
-        <form id="completionForm" action="{{ route('task.completion-report') }}" method="POST" class="w-full mx-auto mt-8 mb-12 tablet:mt-10 tablet:px-4">
-            @csrf
-            <div class="h-4 mx-auto text-xs font-semibold text-center">
-                @error('err')
-                <p class="text-elem-alert">
-                    *! {{ $message }}
-                </p>
-                @enderror
-                @if(session('message'))
-                <p class="text-elem-success">
-                    {{ session('message') }}
-                </p>
-                @endif
-            </div>
-            <div class="flex justify-between items-center relative mt-1">
+            {{-- option 2 --}}
+            <div class="mt-6 h-10 w-full flex justify-between items-center">
                 <button id="toggleCheckBtn" type="button" class="rounded-xl mx-1 text-xs px-2 py-2 bg-admin-accent2 hover:bg-admin-accent2/80 text-white transition-all duration-300 {{ $isCompleted ? 'hidden' : ''}}">
                     タスク全選択
                 </button>
-                <button id="completeTasksBtn" type="button" class="rounded-xl mx-1 text-xs px-2 py-2 bg-admin-accent2 hover:bg-admin-accent2/80 text-white transition-all duration-300 {{ $isCompleted ? 'hidden' : ''}}">
+                <button id="completeTasksBtn" type="button" form="completionForm" class="rounded-xl mx-1 text-xs px-2 py-2 bg-admin-accent2 hover:bg-admin-accent2/80 text-white transition-all duration-300 {{ $isCompleted ? 'hidden' : ''}}">
                     タスク完了報告する
                 </button>
                 <button id="completedListBtn" type="button" class="rounded-xl mx-1 text-xs px-2 py-2 bg-admin-accent2 hover:bg-admin-accent2/80 text-white transition-all duration-300 {{ $isCompleted ? 'ml-auto' : ''}}">
                     {{ $isCompleted ? 'タスク未完了リスト' : 'タスク完了済リスト'}}
                 </button>
             </div>
-            <section id="taskContainer" class="w-full mt-4">
+        </div>
+
+
+        {{-- List --}}
+        <form id="completionForm" action="{{ route('task.completion-report') }}" method="POST" class="w-full mx-auto mt-8 tablet:mt-12">
+            @csrf
+            <section id="taskContainer" class="w-full">
                 {{-- tablet:header --}}
                 <header class="hidden tablet:flex px-4 py-2 bg-admin-base font-bold border-t border-b-2 border-admin-accent-type2">
                     <div class="w-16 pc:w-20 text-center">更新日</div>
@@ -61,7 +67,7 @@
 
                 {{-- items --}}
                 @forelse ( $res as $key => $val )
-                <section class="relative flex w-full bg-white px-4 py-2 h-28 tablet:h-16 border-b-2 border-admin-accent-type2">
+                <section class="relative flex w-full bg-white px-4 py-2 h-28 tablet:h-16 border-b-2 border-admin-accent-type2 {{ $key % 10 === 9 ? 'border-black' : '' }}">
                     {{-- phone --}}
                     <div class="z-1 flex pr-2 min-w-0 tablet:hidden flex-col grow">
                         {{-- main view => 1 --}}
@@ -136,7 +142,7 @@
         </form>
 
         {{-- modal --}}
-        <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
+        {{-- <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
             <div class="py-4 px-3 tablet:px-6 bg-stone-50 rounded-xl shadow-2xl flex flex-col">
                 <div class="flex justify-between items-center">
                     <h2 class="text-xs border-b border-admin-text-sub pr-10">
@@ -156,13 +162,12 @@
                     <button type="button" id="confirmDelete" class="px-3 py-1 w-20 border border-admin-alert rounded-lg text-admin-alert hover:text-white hover:bg-admin-alert transition-colors duration-300">
                         はい
                     </button>
-                    {{-- deleteform --}}
                     <form id="deleteForm" action="" method="POST" class="hidden">
                         @csrf
                     </form>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
 
     @push('script')
@@ -211,13 +216,19 @@
                 typeSelect.addEventListener('change', function() {
                     const selectedType = this.value;
                     const rows = taskContainer.querySelectorAll('section');
+                    let count = 0;
 
                     rows.forEach(row => {
                         const typeCell = row.querySelector('.js-type');
                         const itemTypeText = typeCell ? typeCell.textContent.trim() : '';
                         const chkBox = row.querySelector('.js-chkbox');
                         if (selectedType === '' || itemTypeText === selectedType) {
+                            count++;
+                            // visibility
                             row.style.display = '';
+                            // border-bottom
+                            row.classList.remove('border-black');
+                            if (count % 10 === 0) row.classList.add('border-black');
                         } else {
                             row.style.display = 'none';
                             const isCompleted = {{ $isCompleted ? 'true' : 'false' }};
@@ -238,13 +249,13 @@
 
                 completeTasksBtn.addEventListener('click', function() {
                     const checkedBoxes = document.querySelectorAll('.js-chkbox:checked');
-                    if (checkedBoxes.length > 0) {
-                        if (confirm('完了報告しますか？')) {
+                    // if (checkedBoxes.length > 0) {
+                        // if (confirm('完了報告しますか？')) {
                             completionForm.submit();
-                        }
-                    } else {
-                        alert('タスクが選択されていません');
-                    }
+                        // }
+                    // } else {
+                        // alert('タスクが選択されていません');
+                    // }
                 });
 
                 /**

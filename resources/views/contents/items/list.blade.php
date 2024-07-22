@@ -3,35 +3,39 @@
         商品情報一覧
     @endpush
 
-    {{-- 実装時削除してください
-        TODO :
-            1. 検索機能 -> 不要な場合、該当箇所削除してください / また、テキスト検索・ラジオボタン・チェックボックスを設置していますが、適宜必要なアイテムを使用してください
-            2. contents -> 必要な項目数をウィンドウ幅に応じて設定してください (tablet = 600px- / md = 768px- / lg = 1024px- / pc = 1280px-)
-            3. modal, detail -> idを変数に置換してください
-    --}}
-    <div class="w-[90%] tablet:w-full mx-auto mt-8">
-        <div class="w-full flex justify-between items-center relative">
-            <h1 class="tablet:pl-2 text-2xl font-semibold">
-                商品情報一覧
-            </h1>
-        </div>
-        <div class="w-full flex justify-end items-center relative mt-2">
-            <div class="text-sm mr-4 font-bold">
-                @error('err')
-                <p class="text-elem-alert">
-                    *! {{ $message }}
-                </p>
-                @enderror
-                @if(session('message'))
-                <p class="text-elem-success">
-                    {{ session('message') }}
-                </p>
-                @endif
+    <div class="w-[90%] tablet:w-full mx-auto mt-8 tablet:px-4">
+        {{-- Header --}}
+        <div class="w-full flex flex-col justify-between items-start">
+            {{-- title & messages --}}
+            <div class="w-full flex h-10 jusitfy-start items-baseline">
+                <h1 class="text-2xl font-semibold text-nowrap">
+                    商品情報一覧
+                </h1>
+                <div class="text-xs tablet:text-sm ml-4 tablet:ml-8 grow-[1] font-semibold">
+                    @error('err')
+                    <p class="text-elem-alert">
+                        *! {{ $message }}
+                    </p>
+                    @enderror
+                    @if(session('message'))
+                    <p class="text-elem-success">
+                        {{ session('message') }}
+                    </p>
+                    @endif
+                </div>
             </div>
-            <a href="{{ route('item.new') }}" class="bg-admin-accent tablet:mr-4 px-4 py-2 rounded-xl">
-                新規登録
-            </a>
+            {{-- option 1 --}}
+            <div class="mt-6 h-10 w-full flex justify-end items-center relative">
+                <a href="{{ route('item.new') }}" class="bg-admin-accent px-4 py-2 rounded-xl">
+                    新規登録
+                </a>
+            </div>
+            {{-- option 2 --}}
+            <div class="mt-6 h-10">
+
+            </div>
         </div>
+
 
         {{-- table --}}
         <section class="w-full mx-auto mt-12 mb-10 tablet:px-4">
