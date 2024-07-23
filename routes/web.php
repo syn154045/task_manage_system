@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\ApiInfoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
@@ -26,8 +27,9 @@ Route::post('sign-in', [AuthController::class, 'signin'])->name('signin');
 Route::get('sign-up', [AuthController::class, 'signupView'])->name('signup.view');
 Route::post('sign-up', [AuthController::class, 'signup'])->name('signup');
 
-// Admin After Login
-Route::middleware('auth.admin:administrators')->group(function () {
+
+// Admin(普通・スーパー)
+Route::middleware(['auth:administrators', 'role:admin,super'])->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::post('/sign-out', [AuthController::class, 'signout'])->name('signout');
@@ -68,11 +70,21 @@ Route::middleware('auth.admin:administrators')->group(function () {
 
     // profile edit
     Route::prefix('/profile')->group(function () {
-        // Route::get('/password-edit', [Admin\ProfileController::class, 'passwordView'])->name('password.view');
-        // Route::post('/password-edit' [Admin\ProfileController::class, 'passwordConfirm'])->name('password.confirm);
-        // Route::post('/password-update' [Admin\ProfileController::class, 'passwordUpdate'])->name('password.update);
-        // Route::get('/edit', [Admin\ProfileController::class, 'editProfileView'])->name('profile.view');
-        // Route::post('/edit' [Admin\ProfileController::class, 'profileConfirm'])->name('profile.confirm);
-        // Route::post('/update' [Admin\ProfileController::class, 'profileUpdate'])->name('profile.update);
+        // アカウント編集
+        Route::get('/edit', [ProfileController::class, 'editView'])->name('profile.edit.view');
+        Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/password-update', [ProfileController::class, 'passwordUpdate'])->name('profile.password-update');
+        // アカウント削除
+        Route::get('/delete', [ProfileController::class, 'deleteView'])->name('profile.delete.view');
+        Route::post('/delete', [ProfileController::class, 'delete'])->name('profile.delete');
+        // 管理者権限でのユーザー管理
+        Route::middleware(['auth:administrators', 'role:super'])->group(function() {
+            Route::get('/user-manage', [ProfileController::class,'userManageView'])->name('profile.user-manage.view');
+            Route::post('/user-manage', [ProfileController::class, 'userUpdate'])->name('profile.user.update');
+        });
     });
+});
+
+// 参考：一般ユーザー用
+Route::middleware(['auth:web'])->group(function() {
 });

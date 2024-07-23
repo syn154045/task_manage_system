@@ -28,11 +28,15 @@ class AuthRequest extends FormRequest
             "email" => ['required', 'email', 'max:255'],
             "password" => ['required', 'min:6', Password::min(6)->letters()->numbers()->symbols()],
         ];
-        if ($this->has('name')) {
-            $rules["name"] = ['required', 'max:255'];
-        }
-        if ($this->has('remember')) {
-            $rules["remember"] = ['nullable'];
+        $additionalRules = [
+            "name" => ['required', 'max:255'],
+            "remember" => ['nullable'],
+        ];
+
+        foreach ($additionalRules as $field => $fieldRules) {
+            if ($this->has($field)) {
+                $rules[$field] = $fieldRules;
+            }
         }
 
         return $rules;

@@ -4,12 +4,7 @@
             管理ページ
         </a>
     </h1>
-    {{-- 実装時削除
-        TODO :
-            1. Route -> href="" / Request::is('') ※list,detailがあると思われるのでアスタリスクを付けてください
-            2. $variableCount -> 通知バッヂが必要な場合は、app/View/Components/layouts/admin/render に処理を記述し、resources/views/components/layouts/admin より変数を受渡してください
-            3. アカウント管理 -> 必要な場合は、route + controller + view一式実装してください
-    --}}
+
     <h2 class="mx-1 flex items-center">
         <p class="mr-3 max-w-24 text-xs">
             {{ Auth::guard('administrators')->user()->name }}
@@ -30,7 +25,7 @@
         <li class="w-full h-12 flex">
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-admin-text-main hover:opacity-60 transition duration-500">
-                    <a href="" class="jsMenuItems w-full hidden items-center relative">
+                    <a href="{{ route('profile.edit.view') }}" class="jsMenuItems w-full hidden items-center relative">
                         <i class="fas fa-person w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">アカウント管理</p>
                     </a>

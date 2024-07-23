@@ -72,4 +72,26 @@
             </div>
         </form>
     </div>
+
+    @push('script')
+        <script>
+            /**
+             * password visiblity
+             */
+            const passwordVisible = document.getElementById('passwordVisible');
+            const passwordBox = passwordVisible.nextElementSibling;
+
+            passwordVisible.addEventListener('click', function() {
+                if (passwordVisible.classList.contains('fa-eye-slash')) {
+                    passwordVisible.classList.remove('fa-eye-slash');
+                    passwordVisible.classList.add('fa-eye');
+                    passwordBox.type = 'text';
+                } else {
+                    passwordVisible.classList.remove('fa-eye');
+                    passwordVisible.classList.add('fa-eye-slash');
+                    passwordBox.type = 'password';
+                }
+            });
+        </script>
+    @endpush
 </x-layouts.admin>

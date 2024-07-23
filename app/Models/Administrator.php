@@ -21,6 +21,7 @@ class Administrator extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     protected $hidden = [
@@ -28,11 +29,17 @@ class Administrator extends Authenticatable
         'remember_token',
     ];
 
-    public function register($req) {
+    public function register($req)
+    {
         $this->name = $req["name"];
         $this->email = $req["email"];
         $this->password = Hash::make($req["password"]);
         $this->save();
         return $this;
+    }
+
+    public function findByEmail($email)
+    {
+        return self::where('email', $email)->first();
     }
 }

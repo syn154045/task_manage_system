@@ -1,16 +1,10 @@
 {{-- layouts.admin -> width = w-52(13rem) --}}
 <h1 class="p-5">
-    <a href="{{ route('home') }}" class="text-2xl font-semibold hover:text-admin-text-mainhover transition duration-500">
+    <a href="{{ route('home') }}" class="text-2xl font-semibold hover:text-admin-text-main/80 transition duration-500">
         管理ページ
     </a>
 </h1>
 
-{{-- 実装時削除
-    TODO :
-        1. Route -> href="" / Request::is('') ※list,detailがあると思われるのでアスタリスクを付けてください
-        2. width -> layouts.adminの幅を変更する場合は、"w-52"の箇所も併せて変更してください
-        3. $variableCount -> 通知バッヂが必要な場合は、app/View/Components/layouts/admin/render に処理を記述し、resources/views/components/layouts/admin より変数を受渡してください
---}}
 <nav class="pt-2 pl-5 pr-1 text-sm text-admin-text-sub">
     <div class="pt-2 pb-1">
         <a href="{{ route('api-info.list') }}" class="relative flex items-center h-12 hover:opacity-60 transition duration-300 @if(Request::is('api-info/*')) font-bold @endif">

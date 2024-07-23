@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Models\Administrator;
-use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -25,7 +24,7 @@ class AuthController extends Controller
      */
     public function signinView()
     {
-        if (Auth::guard('administrators')->user()) {
+        if (Auth::guard('administrators')->check()) {
             return redirect()->route('home');
         }
         return view('signin');
@@ -42,12 +41,26 @@ class AuthController extends Controller
         if (Auth::guard('administrators')->attempt($credentials, $remember)) {
             return redirect()->route('home');
         } else {
-            return back()->withErrors([
-                'signin' => ['ログインに失敗しました'],
-            ]);
+            return $this->handleAuthenticationError($request);
         }
     }
 
+    /**
+     * サインインエラー処理
+     */
+    private function handleAuthenticationError($request)
+    {
+        $user = $this->administrator->findByEmail($request->email);
+        if (!$user) {
+            return redirect()->back()->withErrors(["email" => "メールアドレスが見つかりません"]);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withInput($request->except('password'))->withErrors(["password" => "パスワードが誤っています"]);
+        }
+
+        return redirect()->back()->withErrors(["signup" => "認証エラーが発生しました"]);
+    }
 
     /**
      * サインアップページ
@@ -66,6 +79,7 @@ class AuthController extends Controller
     public function signup(AuthRequest $request)
     {
         $req = $request->only(['name', 'email', 'password']);
+
         try {
             $res = $this->administrator->register($req);
             $credentials = $request->only(['email', 'password']);
