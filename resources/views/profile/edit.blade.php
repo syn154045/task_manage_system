@@ -1,6 +1,6 @@
-<x-layouts.user>
+<x-layouts.admin>
     @push('title')
-        アカウント情報変更
+        ユーザー情報変更
     @endpush
 
     <div class="text-center text-base h-4">
@@ -18,7 +18,7 @@
 
     <div class="w-[90%] mx-auto border rounded-2xl border-admin-accent2 p-6 bg-admin-accent2/10 relative mt-8">
         <h2 class="absolute -top-3 bg-admin-accent2 text-white px-4 py-1 text-sm rounded-xl">
-            アカウント変更
+            ユーザー情報変更
         </h2>
         <form action="{{ route('profile.update') }}" method="POST" class="w-[80%] mx-auto flex flex-col justify-center items-center">
             @csrf
@@ -48,8 +48,8 @@
                 @enderror
             </div>
             <div class="mt-12 w-full flex justify-center">
-                <button type="submit" class="w-1/3 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
-                    アカウント情報更新
+                <button type="submit" class="w-1/3 min-w-48 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
+                    ユーザー情報更新
                 </button>
             </div>
         </form>
@@ -105,8 +105,30 @@
                 @enderror
             </div>
             <div class="mt-12 w-full flex justify-center">
-                <button type="submit" class="w-1/3 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
+                <button type="submit" class="w-1/3 min-w-48 bg-admin-accent p-2 rounded-md hover:bg-admin-accent/60 focus:outline-none focus:bg-admin-accent/60 transition-colors duration-300">
                     パスワード更新
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-[90%] mx-auto border rounded-2xl border-admin-accent2 p-6 bg-admin-accent2/10 relative mt-20">
+        <h2 class="absolute -top-3 bg-admin-accent2 text-white px-4 py-1 text-sm rounded-xl">
+            ユーザー削除
+        </h2>
+        <form action="{{ route('profile.delete') }}" method="POST" class="w-[80%] mx-auto flex flex-col justify-center items-center">
+            @csrf
+            <div class="relative mt-10 w-full text-lg font-semibold">
+                <div>
+                    本当に削除しますか？
+                </div>
+                <div>
+                    この処理は元に戻せません。
+                </div>
+            </div>
+            <div class="mt-10 text-center">
+                <button type="submit" class="px-10 py-2 rounded-xl border-2 border-elem-alert text-elem-alert hover:bg-elem-alert/20 transition-all duration-300">
+                    はい
                 </button>
             </div>
         </form>
@@ -138,4 +160,4 @@
             });
         </script>
     @endpush
-</x-layouts.user>
+</x-layouts.admin>

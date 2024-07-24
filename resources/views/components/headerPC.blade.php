@@ -1,5 +1,16 @@
-<div class="flex justify-end items-center h-12 pr-5">
-    <div class="relative inline-block">
+<div class="flex justify-between items-center h-12 px-5">
+    {{-- header logo --}}
+    @if(Request::is('profile/*'))
+    <div class="px-5">
+        <a href="{{ route('home') }}" class="text-xl font-semibold hover:text-admin-text-mainhover transition duration-500">
+            <i class="fas fa-square-caret-left fa-xs"></i>
+            <span class="pl-4">メインメニューへ</span>
+        </a>
+    </div>
+    @endif
+
+    {{-- user tab --}}
+    <div class="relative inline-block ml-auto">
         <button id="dropdownBtn" class="w-32 mr-3">
             <label for="dropdown" class="relative w-full h-10 cursor-pointer flex justify-center items-center duration-500 bg-admin-accent hover:bg-admin-accent/60 rounded-xl text-sm">
                 <input type="button" id="dropdownCheck" class="hidden peer" onclick="dropdownToggle()">
@@ -12,7 +23,7 @@
         <div id="dropdownContainer" class="absolute right-0 bg-admin-accent w-44 shadow-lg z-[99] mt-1 rounded-xl text-admin-text-sub text-sm hidden opacity-0 transition-opacity duration-500 ease-out">
             <a href="{{ route('profile.edit.view') }}" class="flex items-center px-4 py-2 border-b border-white hover:opacity-60 transition-opacity duration-500">
                 <i class="fas fa-lg fa-person w-1/6"></i>
-                <p class="w-5/6">アカウント管理</p>
+                <p class="w-5/6">ユーザー管理</p>
             </a>
             <form method="POST" action="{{ route('signout')}}" class="w-full">
                 @csrf

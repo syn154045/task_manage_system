@@ -23,43 +23,16 @@
 
 <body class="font-zen-maru bg-admin-base text-admin-text-main min-h-screen w-full antialiased">
     <div class="h-full">
-        <div class="p-5 h-12 w-full bg-admin-main shadow-admin-main shadow-md">
+        <header class="tablet:hidden stickey top-0 z-20">
+
+        </header>
+        <header class="hidden tablet:block stickey top-0 z-20 p-5 h-12 w-full bg-admin-main shadow-admin-main shadow-md">
             <a href="{{ route('home') }}" class="text-2xl font-semibold hover:text-admin-text-mainhover transition duration-500">
                 <i class="fas fa-left-long fa-xs"></i>
-                トップページ
+                IN NO USE
             </a>
-        </div>
-        <h2 class="mt-10 text-center">
-            お疲れ様です、{{ Auth::guard('administrators')->user()->name }}　さん
-        </h2>
-        {{-- navigation button (600px~) --}}
-        <nav class="mt-12 w-full hidden tablet:flex justify-center items-center">
-            <div class="bg-admin-accent rounded-t-xl mx-2 hover:bg-admin-accent/60 transition-all duration-300 {{ Request::is('profile/edit') ? 'bg-admin-accent/60' : '' }}">
-                <a href="{{ route('profile.edit.view') }}" class="inline-block px-4 py-2">
-                    アカウント情報変更
-                </a>
-            </div>
-            <div class="bg-admin-accent rounded-t-xl mx-2 hover:bg-admin-accent/60 transition-all duration-300 {{ Request::is('profile/delete') ? 'bg-admin-accent/60' : '' }}">
-                <a href="{{ route('profile.delete.view') }}" class="inline-block px-4 py-2">
-                    アカウント削除
-                </a>
-            </div>
-            {{-- super only --}}
-            @if(Auth::guard('administrators')->user()->role === 'super')
-            <div class="bg-admin-accent rounded-t-xl mx-2 hover:bg-admin-accent/60 transition-all duration-300 {{ Request::is('profile/user-manage') ? 'bg-admin-accent/60' : '' }}">
-                <a href="{{ route('profile.user-manage.view') }}" class="inline-block px-4 py-2">
-                    ユーザー管理
-                </a>
-            </div>
-            @endif
-        </nav>
-        {{-- navigation bar (~600px) --}}
+        </header>
 
-
-        {{-- main --}}
-        <main class="mt-24 tablet:mt-0 border-4 rounded-xl bg-admin-accent/30 border-admin-accent w-[90%] max-w-5xl mx-auto px-4 py-10">
-            {{ $slot }}
-        </main>
     </div>
     <x-footer />
     @stack('script')

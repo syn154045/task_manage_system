@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
 class Administrator extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUlids;
+    use HasFactory, Notifiable, HasUlids, SoftDeletes;
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';

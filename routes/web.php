@@ -70,17 +70,16 @@ Route::middleware(['auth:administrators', 'role:admin,super'])->group(function (
 
     // profile edit
     Route::prefix('/profile')->group(function () {
-        // アカウント編集
         Route::get('/edit', [ProfileController::class, 'editView'])->name('profile.edit.view');
+        // アカウント編集
         Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('/password-update', [ProfileController::class, 'passwordUpdate'])->name('profile.password-update');
         // アカウント削除
-        Route::get('/delete', [ProfileController::class, 'deleteView'])->name('profile.delete.view');
         Route::post('/delete', [ProfileController::class, 'delete'])->name('profile.delete');
         // 管理者権限でのユーザー管理
         Route::middleware(['auth:administrators', 'role:super'])->group(function() {
-            Route::get('/user-manage', [ProfileController::class,'userManageView'])->name('profile.user-manage.view');
-            Route::post('/user-manage', [ProfileController::class, 'userUpdate'])->name('profile.user.update');
+            Route::get('/auth-manage', [ProfileController::class,'authManageView'])->name('profile.auth-manage.view');
+            Route::post('/auth-manage', [ProfileController::class, 'authUpdate'])->name('profile.auth.update');
         });
     });
 });

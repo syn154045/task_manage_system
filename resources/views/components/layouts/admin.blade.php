@@ -31,8 +31,8 @@
     {{-- admin page --}}
     @else
     <div class="flex h-full">
-        {{-- home画面はsideBarを使用しません --}}
-        @if (!(Request::is('/')))
+        {{-- home画面、profile編集画面はsideBarを使用しません --}}
+        @if (!(Request::is('/') || Request::is('profile/*')))
         <aside class="hidden tablet:block fixed bg-admin-main w-52 h-screen shadow-admin-main shadow-xl overflow-y-scroll hidden-scrollbar">
             <x-sidebar :taskCount=$taskCount />
         </aside>
@@ -50,10 +50,22 @@
                 <x-headerSP :taskCount=$taskCount />
             </header>
 
-            {{-- main contents --}}
-            <main class="overflow-y-auto">
-                {{ $slot }}
-            </main>
+            {{-- profile編集画面固有レイアウト --}}
+            @if(Request::is('profile/*'))
+                <x-profileNav />
+
+                {{-- profile main contents --}}
+                <main class="tablet:mt-0 tablet:border-t-4 tablet:border-admin-accent w-full px-4 py-10">
+                    <div class="tablet:max-w-4xl mx-auto">
+                        {{ $slot }}
+                    </div>
+                </main>
+            @else
+                {{-- main contents --}}
+                <main class="overflow-y-auto">
+                    {{ $slot }}
+                </main>
+            @endif
         </container>
     </div>
     @endif
