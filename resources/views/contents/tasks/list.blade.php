@@ -93,7 +93,7 @@
                             {{ isset($val->updated_at) ? $val->updated_at->format('y/m/d'): $val->created_at->format('y/m/d') }}
                         </p>
                         <p class="hidden pc:block">
-                            {{ isset($val->updated_at) ? $val->updated_at->format('Y/m/d'): $val->created_at->format('Y/m/d') }}
+                            {{ isset($val->updated_at) ? $val->updated_at->format('Y/m/d'): $val->created_at->format('Y/m/d h:m:s') }}
                         </p>
                     </div>
                     <div class="flex justify-center w-16 items-center px-2">

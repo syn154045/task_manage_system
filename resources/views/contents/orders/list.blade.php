@@ -36,14 +36,21 @@
             </div>
             {{-- option 2 --}}
             <div class="mt-6 h-10 w-full flex justify-between">
-                <button type="button" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
+                <button type="button" onclick="showDeleteModal()" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
                     受注情報削除
                 </button>
-                <form action="{{ route('order.task-output') }}" method="POST">
+                <form action="{{ route('order.task-output') }}" method="POST" class="relative">
                     @csrf
+                    @method('put')
                     <button type="submit" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
                         タスク出力
                     </button>
+                    <span class="absolute text-sm top-11 right-2 text-nowrap">
+                        未出力データ数 =
+                        <span class="text-elem-info font-semibold">
+                            {{ $outputPendingCount }}
+                        </span>
+                    </span>
                 </form>
             </div>
         </div>
@@ -56,11 +63,12 @@
                 <div class="flex-1 grow-[3] px-2 text-center">受注詳細</div>
                 <div class="hidden md:block flex-1 grow-[1] px-2 text-center">ショップ</div>
                 {{-- <div class="w-28 pc:w-40"></div> --}}
+                <div class="w-16 pc:w-24"></div>
             </header>
 
             {{-- items --}}
             @forelse ( $res as $key => $val )
-            <section class="relative flex w-full bg-white px-4 py-2 h-28 tablet:h-16 border-b-2 border-admin-accent-type2">
+            <section class="relative flex w-full px-4 py-2 h-28 tablet:h-16 border-b-2 border-admin-base {{ $val->output_status == true ? 'bg-gray-100 text-gray-400' : 'bg-white'}}">
                 {{-- phone --}}
                 <div class="z-1 flex pr-2 min-w-0 tablet:hidden flex-col grow">
                     {{-- main view => 1 --}}
@@ -97,25 +105,26 @@
                 </div>
 
                 {{-- edit & delete --}}
-                {{-- <div class="flex-none tablet:flex pl-2 w-20 tablet:w-28 pc:w-40 space-y-2 tablet:space-y-0 pc:space-x-1 justify-between">
-                    <div class="flex items-center">
+                {{-- <div class="flex-none tablet:flex pl-2 w-20 tablet:w-28 pc:w-40 space-y-2 tablet:space-y-0 pc:space-x-1 justify-between"> --}}
+                <div class="flex-none tablet:flex pl-2 w-20 tablet:w-16 pc:w-24 space-y-2 tablet:space-y-0 pc:space-x-1 justify-between">
+                    {{-- <div class="flex items-center">
                         <a href="{{ route('order.edit', $val->id)}}" class="px-2 pc:px-4 py-2 w-full rounded-xl border-2 border-admin-accent text-admin-accent hover:bg-admin-accent/30 transition-all duration-500 text-sm pc:text-base text-last-justify">
                             編集
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="flex items-center">
                         <button id="deleteBtn" onclick="showDeleteModal('{{$val->id}}')" class="px-2 pc:px-4 py-2 w-full rounded-xl border-2 border-elem-alert text-elem-alert hover:bg-elem-alert/30 transition-all duration-500 text-sm pc:text-base text-last-justify">
                             削除
                         </button>
                     </div>
-                </div> --}}
+                </div>
             </section>
             @empty
             @endforelse
         </section>
 
         {{-- modal --}}
-        {{-- <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
+        <section id="deleteModal" class="z-30 fixed inset-0 items-center justify-center bg-black hidden bg-opacity-30">
             <div class="py-4 px-3 tablet:px-6 bg-stone-50 rounded-xl shadow-2xl flex flex-col">
                 <div class="flex justify-between items-center">
                     <h2 class="text-xs border-b border-admin-text-sub pr-10">
@@ -135,12 +144,22 @@
                     <button type="button" id="confirmDelete" class="px-3 py-1 w-20 border border-elem-alert rounded-lg text-elem-alert hover:text-white hover:bg-elem-alert/80 transition-colors duration-300">
                         はい
                     </button>
-                    <form id="deleteForm" action="" method="POST" class="hidden">
+                    <form id="deleteSection" action="" method="POST" class="hidden">
+                        {{-- 各section delete --}}
+                        @csrf
+                    </form>
+                    <form id="deleteAll" action="{{ route('order.delete-all') }}" method="POST" class="hidden">
+                        {{-- ALL delete --}}
                         @csrf
                     </form>
                 </div>
             </div>
-        </section> --}}
+        </section>
+
+        {{-- pagination --}}
+        <div class="mt-8">
+            {{ $res->links('vendor.pagination.paginate') }}
+        </div>
     </div>
 
     @push('script')
@@ -150,7 +169,8 @@
              */
             // const deleteModal = document.getElementById('deleteModal');
             const confirmDelete = document.getElementById('confirmDelete');
-            const deleteForm = document.getElementById('deleteForm');
+            const deleteSection = document.getElementById('deleteSection');
+            const deleteAll = document.getElementById('deleteAll');
             let deleteKeyItem = null;
 
             // show
@@ -174,9 +194,14 @@
 
             // delete request
             confirmDelete.addEventListener('click', function () {
-                if (deleteKeyItem !== null) {
-                    deleteForm.action = `/orders/delete/${deleteKeyItem}`;
-                    deleteForm.submit();
+                if (deleteKeyItem !== null && deleteKeyItem !== undefined) {
+                    // 各sectionでのdelete POST
+                    deleteSection.action = `/orders/delete/${deleteKeyItem}`;
+                    deleteSection.submit();
+                } else {
+                    // ALL delete POST
+                    deleteAll.action = `/orders/delete-all`;
+                    deleteAll.submit();
                 }
             });
 

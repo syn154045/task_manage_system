@@ -29,13 +29,17 @@ class OrderController extends Controller
      */
     public function list()
     {
-        $res = $this->order->select('id', 'shop_name', 'order_detail','created_at')
+        $res = $this->order->select('id', 'shop_name', 'order_detail', 'output_status', 'created_at')
         ->whereNull('deleted_at')
-        ->where('output_status', false)
+        ->orderByRaw('output_status, false')
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(20);
 
-        return view ('contents/orders/list', compact('res'));
+        $outputPendingCount = $this->order->whereNull('deleted_at')
+        ->where('output_status', false)
+        ->count();
+
+        return view ('contents/orders/list', compact('res', 'outputPendingCount'));
     }
 
 
@@ -150,5 +154,13 @@ class OrderController extends Controller
     {
         // 個別に削除する必要があれば
         dd($request);
+    }
+
+    /**
+     * 受注情報 全件削除
+     */
+    public function deleteAll(Request $request)
+    {
+        dd('hoge');
     }
 }

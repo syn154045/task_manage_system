@@ -51,7 +51,8 @@ Route::middleware(['auth:administrators', 'role:admin,super'])->group(function (
     Route::prefix('orders')->group(function () {
         Route::get('/list', [OrderController::class, 'list'])->name('order.list');
         Route::post('/csv-upload', [OrderController::class, 'csvUpload'])->name('order.csv-upload');
-        Route::post('/task-output', [OrderController::class, 'taskOutput'])->name('order.task-output');
+        Route::put('/task-output', [OrderController::class, 'taskOutput'])->name('order.task-output');
+        Route::post('/delete-all', [OrderController::class, 'deleteAll'])->name('order.delete-all');
         // order edit / update / delete は未実装（ルーティングのみ通しています）
         Route::get('/{id}', [OrderController::class, 'edit'])->name('order.edit');
         Route::post('/update/{id}', [OrderController::class, 'update'])->name('order.update');
@@ -60,8 +61,9 @@ Route::middleware(['auth:administrators', 'role:admin,super'])->group(function (
 
     Route::prefix('tasks')->group(function () {
         Route::get('/list', [TaskController::class, 'list'])->name('task.list');
-        Route::post('/completion-report', [TaskController::class, 'completionReport'])->name('task.completion-report');
         Route::get('/list-completed', [TaskController::class, 'list'])->name('task.list-completed');
+        Route::post('/completion-report', [TaskController::class, 'completionReport'])->name('task.completion-report');
+        Route::post('/label-print', [TaskController::class, 'labelPrint'])->name('task.label-print');
         // task edit / update / delete は未実装（ルーティングのみ通しています）
         Route::get('{id}', [TaskController::class, 'edit'])->name('task.edit');
         Route::post('/update/{id}', [TaskController::class, 'update'])->name('task.update');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 
 class TaskController extends Controller
 {
@@ -17,7 +16,7 @@ class TaskController extends Controller
     }
 
     /**
-     * タスク状況 list（未終了のみ）
+     * タスク状況 list (isCompletedで、完了済リストか未完了リストか判定)
      */
     public function list(Request $request)
     {
@@ -27,9 +26,9 @@ class TaskController extends Controller
         $res = $this->task->with(['item', 'order'])
         ->whereNull('tasks.deleted_at')
         ->where('completion_status', $isCompleted ? 1 : 0)
-        ->orderBy('tasks.updated_at', 'desc')
         ->join('items', 'tasks.item_id', '=', 'items.id')
-        ->orderByRaw('items.type ASC, items.name ASC')
+        // ->orderByRaw('tasks.updated_at DESC, items.type ASC, items.name ASC')
+        ->orderByRaw('items.type ASC, items.name ASC, tasks.updated_at DESC')
         ->select('tasks.*')
         ->get();
 
