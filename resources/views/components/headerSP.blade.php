@@ -46,7 +46,7 @@
         <li class="w-full h-12 flex">
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-admin-text-sub hover:opacity-60 transition duration-500">
-                    <a href="" class="jsMenuItems w-full hidden items-center relative">
+                    <a href="{{ route('api-info.list') }}" class="jsMenuItems w-full hidden items-center relative">
                         <i class="fas fa-earth-asia w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">API情報管理</p>
                         @if (Request::is('api-info/*'))
@@ -57,7 +57,7 @@
             </div>
             <div class="w-1/2 flex justify-center">
                 <div class="w-[85%] flex items-center p-2 border-b border-admin-text-sub hover:opacity-60 transition duration-500">
-                    <a href="" class="jsMenuItems w-full hidden items-center relative">
+                    <a href="{{ route('item.list') }}" class="jsMenuItems w-full hidden items-center relative">
                         <i class="fas fa-location-dot w-1/6"></i>
                         <p class="w-5/6 pl-1 text-wrap">商品情報一覧</p>
                         @if (Request::is('items/*'))

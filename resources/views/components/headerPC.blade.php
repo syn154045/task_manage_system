@@ -21,13 +21,13 @@
 
         {{-- ドロップダウンメニュー --}}
         <div id="dropdownContainer" class="absolute right-0 bg-admin-accent w-44 shadow-lg z-[99] mt-1 rounded-xl text-admin-text-sub text-sm hidden opacity-0 transition-opacity duration-500 ease-out">
-            <a href="{{ route('profile.edit.view') }}" class="flex items-center px-4 py-2 border-b border-white hover:opacity-60 transition-opacity duration-500">
+            <a href="{{ route('profile.edit.view') }}" class="flex items-center px-4 py-3 border-b border-white hover:opacity-60 transition-opacity duration-500">
                 <i class="fas fa-lg fa-person w-1/6"></i>
                 <p class="w-5/6">ユーザー管理</p>
             </a>
             <form method="POST" action="{{ route('signout')}}" class="w-full">
                 @csrf
-                <button type="submit" class="flex items-center w-full px-4 py-2 text-left hover:opacity-60 transition-opacity duration-500">
+                <button type="submit" class="flex items-center w-full px-4 py-3 text-left hover:opacity-60 transition-opacity duration-500">
                     <i class="fas fa-lg fa-person-running w-1/6"></i>
                     <p class="w-5/6">ログアウト</p>
                 </button>
