@@ -26,7 +26,7 @@
             </div>
             {{-- option 1 --}}
             <div class="w-full flex flex-col-reverse lg:flex-row justify-end items-end lg:items-center relative mt-6 h-10">
-                <form action="{{ route('order.csv-upload') }}" method="POST" enctype="multipart/form-data" class="flex items-center justify-end space-x-2 tablet:space-x-4 grow-0">
+                <form action="{{ route('order.csv-upload') }}" method="POST" enctype="multipart/form-data" class="flex items-center justify-end space-x-2 grow-0">
                     @csrf
                     <input type="file" name="csvFile" id="csvFile" class="text-xs tablet:text-sm" accept=".csv,.xlsx">
                     <button type="submit" class="bg-admin-accent px-2 tablet:px-4 py-2 rounded-xl min-w-24 hover:bg-admin-accent/80 transition-all duration-300">
@@ -60,7 +60,7 @@
             {{-- tablet:header --}}
             <header class="hidden tablet:flex px-4 py-2 bg-admin-base font-bold border-t border-b-2 border-admin-accent-type2">
                 <div class="w-20 pc:w-24 text-center">受信日</div>
-                <div class="flex-1 grow-[3] px-2 text-center">受注詳細</div>
+                <div class="flex-1 md:grow-[3] px-2 text-center">受注詳細</div>
                 <div class="hidden md:block flex-1 grow-[1] px-2 text-center">ショップ</div>
                 {{-- <div class="w-28 pc:w-40"></div> --}}
                 <div class="w-16 pc:w-24"></div>
@@ -158,7 +158,7 @@
 
         {{-- pagination --}}
         <div class="mt-8">
-            {{ $res->links('vendor.pagination.paginate') }}
+            {{ $res->onEachSide(2)->links('vendor.pagination.paginate') }}
         </div>
     </div>
 
